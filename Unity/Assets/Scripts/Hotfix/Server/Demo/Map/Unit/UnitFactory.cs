@@ -13,6 +13,7 @@ namespace ET.Server
                 case UnitType.Player:
                 {
                     Unit unit = unitComponent.AddChildWithId<Unit, int>(id, 1001);
+                    //添加移动组件，数值组件，AOI 组件
                     unit.AddComponent<MoveComponent>();
                     unit.Position = new float3(-10, 0, -10);
 			

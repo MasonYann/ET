@@ -6,6 +6,7 @@ namespace ET
     {
         private int timeZone;
         
+        //用于获取和设置时区。
         public int TimeZone
         {
             get
@@ -23,8 +24,10 @@ namespace ET
         private DateTime dt;
         
         // ping消息会设置该值，原子操作
+        // 服务器与客户端时间差，可通过ping消息更新。
         public long ServerMinusClientTime { private get; set; }
 
+        //当前帧的时间戳。
         public long FrameTime { get; private set; }
         
         public void Awake()
@@ -49,26 +52,32 @@ namespace ET
         }
         
         // 线程安全
+        // 当前客户端的时间戳
         public long ClientNow()
         {
             return (DateTime.UtcNow.Ticks - this.dt1970.Ticks) / 10000;
         }
         
+        //服务器收到消息的时间戳。
+        //客户端当前的时间戳 + 客户端发送消息到服务器的时间间隔。
         public long ServerNow()
         {
             return ClientNow() + this.ServerMinusClientTime;
         }
         
+        //客户端当前帧的时间戳。
         public long ClientFrameTime()
         {
             return this.FrameTime;
         }
         
+        //服务器当前帧的时间戳。
         public long ServerFrameTime()
         {
             return this.FrameTime + this.ServerMinusClientTime;
         }
         
+        //计算给定时间与当前时间的差值。
         public long Transition(DateTime d)
         {
             return (d.Ticks - dt.Ticks) / 10000;

@@ -31,7 +31,7 @@ namespace ET
 
         private EntityRef<LSWorld> lsWorld;
 
-        // LSWorld做成child，可以有多个lsWorld，比如守望先锋有两个
+        // LSWorld做成child，可以有多个lsWorld，比如守望先锋有两个 : 一个是正常模式，一个是回放系统模式
         public LSWorld LSWorld
         {
             get

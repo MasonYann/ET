@@ -20,6 +20,14 @@ namespace ET.Server
             await fiber.Root.GetComponent<MessageSender>().Call(GetLocationSceneId(key), objectAddRequest);
         }
 
+        /// <summary>
+        /// 锁住 key。
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="type"></param>
+        /// <param name="key"></param>
+        /// <param name="actorId"></param>
+        /// <param name="time"></param>
         public static async ETTask Lock(this LocationProxyComponent self, int type, long key, ActorId actorId, int time = 60000)
         {
             Fiber fiber = self.Fiber();

@@ -38,9 +38,12 @@ namespace ET.Client
 
         public static async ETTask<long> LoginAsync(this ClientSenderComponent self, string account, string password)
         {
+            //创建网络纤程，并获取网络纤程 Id
             self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
+            //实例化进程纤程 Id 实例
             self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);
 
+            //主纤程发送到网络纤程登录的消息，由于是多进程多线程，所以需要知道网络纤程的进程 Id 和进程中的纤程 Id
             Main2NetClient_Login main2NetClientLogin = Main2NetClient_Login.Create();
             main2NetClientLogin.OwnerFiberId = self.Fiber().Id;
             main2NetClientLogin.Account = account;

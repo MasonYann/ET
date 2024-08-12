@@ -24,6 +24,9 @@ namespace ET
         }
     }
 
+    /// <summary>
+    /// 帧同步世界容器。
+    /// </summary>
     [EnableMethod]
     [ChildOf]
     [MemoryPackable]

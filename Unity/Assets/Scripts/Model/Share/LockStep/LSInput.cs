@@ -3,6 +3,9 @@ using MemoryPack;
 
 namespace ET
 {
+    /// <summary>
+    /// 输入操作。
+    /// </summary>
     [MemoryPackable]
     public partial struct LSInput
     {

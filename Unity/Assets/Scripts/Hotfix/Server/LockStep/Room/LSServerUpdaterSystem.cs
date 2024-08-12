@@ -29,14 +29,21 @@ namespace ET.Server
             OneFrameInputs oneFrameInputs = self.GetOneFrameMessage(frame);
             ++room.AuthorityFrame;
 
+            //复制获取到的输入信息
             OneFrameInputs sendInput = OneFrameInputs.Create();
             oneFrameInputs.CopyTo(sendInput);
-
+            //广播给客户端
             RoomMessageHelper.BroadCast(room, sendInput);
 
             room.Update(oneFrameInputs);
         }
 
+        /// <summary>
+        /// 获取当前一帧的输入信息。
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="frame"></param>
+        /// <returns></returns>
         private static OneFrameInputs GetOneFrameMessage(this LSServerUpdater self, int frame)
         {
             Room room = self.GetParent<Room>();
@@ -44,11 +51,13 @@ namespace ET.Server
             OneFrameInputs oneFrameInputs = frameBuffer.FrameInputs(frame);
             frameBuffer.MoveForward(frame);
 
+            //如果所有玩家的输入信息都获取到了就返回帧输入信息
             if (oneFrameInputs.Inputs.Count == LSConstValue.MatchCount)
             {
                 return oneFrameInputs;
             }
 
+            //获取上一帧的输入信息
             OneFrameInputs preFrameInputs = null;
             if (frameBuffer.CheckFrame(frame - 1))
             {

@@ -14,6 +14,10 @@ namespace ET.Client
             self.MyId = room.Root().GetComponent<PlayerComponent>().MyId;
         }
         
+        /// <summary>
+        /// 实时预测帧。
+        /// </summary>
+        /// <param name="self"></param>
         [EntitySystem]
         private static void Update(this LSClientUpdater self)
         {
@@ -43,6 +47,7 @@ namespace ET.Client
                 
                 room.SpeedMultiply = ++i;
 
+                //发送帧信息到房间服务器
                 FrameMessage frameMessage = FrameMessage.Create();
                 frameMessage.Frame = room.PredictionFrame;
                 frameMessage.Input = self.Input;

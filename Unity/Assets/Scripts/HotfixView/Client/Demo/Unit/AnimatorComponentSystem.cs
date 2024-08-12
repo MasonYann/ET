@@ -35,6 +35,7 @@ namespace ET.Client
 				return;
 			}
 			self.Animator = animator;
+			//获取运行时所有的 AnimationClip
 			foreach (AnimationClip animationClip in animator.runtimeAnimatorController.animationClips)
 			{
 				self.animationClips[animationClip.name] = animationClip;

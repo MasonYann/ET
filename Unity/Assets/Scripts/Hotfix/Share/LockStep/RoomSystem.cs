@@ -15,14 +15,20 @@ namespace ET
         public static void Init(this Room self, List<LockStepUnitInfo> unitInfos, long startTime, int frame = -1)
         {
             self.StartTime = startTime;
+            //权威帧和预测帧回滚到收到的权威帧
             self.AuthorityFrame = frame;
             self.PredictionFrame = frame;
             self.Replay.UnitInfos = unitInfos;
+            //创建帧缓存
             self.FrameBuffer = new FrameBuffer(frame);
+            //创建固定时间间隔组件
             self.FixedTimeCounter = new FixedTimeCounter(self.StartTime, 0, LSConstValue.UpdateInterval);
+            //创建帧同步世界容器
             LSWorld lsWorld = self.LSWorld;
             lsWorld.Frame = frame + 1;
+            //世界容器添加 Unit 组件
             lsWorld.AddComponent<LSUnitComponent>();
+            //初始化服务器 Unit
             for (int i = 0; i < unitInfos.Count; ++i)
             {
                 LockStepUnitInfo unitInfo = unitInfos[i];

@@ -19,6 +19,7 @@ namespace ET
         {
             LSUnit unit = self.GetParent<LSUnit>();
 
+            //为什么要这么算？
             TSVector2 v2 = self.LSInput.V * 6 * 50 / 1000;
             if (v2.LengthSquared() < 0.0001f)
             {

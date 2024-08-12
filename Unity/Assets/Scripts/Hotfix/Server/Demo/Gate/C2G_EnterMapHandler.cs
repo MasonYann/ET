@@ -13,7 +13,7 @@
 
 			Scene scene = gateMapComponent.Scene;
 			
-			// 这里可以从DB中加载Unit
+			// 这里可以从DB中加载创建Unit
 			Unit unit = UnitFactory.Create(scene, player.Id, UnitType.Player);
 			
 			StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map1");

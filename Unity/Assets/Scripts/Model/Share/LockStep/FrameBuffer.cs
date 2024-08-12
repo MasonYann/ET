@@ -4,11 +4,23 @@ using System.IO;
 
 namespace ET
 {
+    /// <summary>
+    /// 帧缓存。
+    /// </summary>
     public class FrameBuffer: Object
     {
         public int MaxFrame { get; private set; }
+        /// <summary>
+        /// 每帧输入列表。
+        /// </summary>
         private readonly List<OneFrameInputs> frameInputs;
+        /// <summary>
+        /// 内存缓冲器列表。（快照同步数据）
+        /// </summary>
         private readonly List<MemoryBuffer> snapshots;
+        /// <summary>
+        /// 哈希值列表。
+        /// </summary>
         private readonly List<long> hashs;
 
         public FrameBuffer(int frame = 0, int capacity = LSConstValue.FrameCountPerSecond * 60)
@@ -64,6 +76,11 @@ namespace ET
             }
         }
         
+        /// <summary>
+        /// 获取某一帧的帧数据。
+        /// </summary>
+        /// <param name="frame"></param>
+        /// <returns></returns>
         public OneFrameInputs FrameInputs(int frame)
         {
             EnsureFrame(frame);
@@ -84,6 +101,11 @@ namespace ET
             oneFrameInputs.Inputs.Clear();
         }
 
+        /// <summary>
+        /// 内存缓冲区中获取某一帧的快照同步数据。
+        /// </summary>
+        /// <param name="frame"></param>
+        /// <returns></returns>
         public MemoryBuffer Snapshot(int frame)
         {
             EnsureFrame(frame);

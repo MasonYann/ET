@@ -4,6 +4,12 @@ namespace ET.Client
 {
     public static partial class UnitFactory
     {
+	    /// <summary>
+	    /// 创建客户端 Unit。
+	    /// </summary>
+	    /// <param name="currentScene"></param>
+	    /// <param name="unitInfo"></param>
+	    /// <returns></returns>
         public static Unit Create(Scene currentScene, UnitInfo unitInfo)
         {
 	        UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();

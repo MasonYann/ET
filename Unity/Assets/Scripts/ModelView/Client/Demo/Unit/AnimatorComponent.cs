@@ -16,10 +16,10 @@ namespace ET.Client
 		public Dictionary<string, AnimationClip> animationClips = new();
 		public HashSet<string> Parameter = new();
 
-		public MotionType MotionType;
-		public float MontionSpeed;
-		public bool isStop;
-		public float stopSpeed;
+		public MotionType MotionType;//运动类型
+		public float MontionSpeed;	//运动速度
+		public bool isStop;			//是否停止
+		public float stopSpeed;		//停止速度
 		public Animator Animator;
 	}
 }

@@ -100,6 +100,9 @@ namespace ET
         
         public async ETTask<int> Create(SchedulerType schedulerType, int zone, SceneType sceneType, string name)
         {
+            //Interlocked.Increment(ref this.idGenerator) 
+            //防止多个线程同时修改生成的 Id，从而导致数据竞争或不一致问题。
+            //这个方法是线程安全的，因为它使用特殊的CPU指令来确保递增操作不会被其他线程的操作所干扰。这使得 Interlocked.Increment 成为在多线程环境中进行简单同步的首选方法之一。
             int fiberId = Interlocked.Increment(ref this.idGenerator);
             return await this.Create(schedulerType, fiberId, zone, sceneType, name);
         }

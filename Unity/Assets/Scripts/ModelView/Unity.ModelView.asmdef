@@ -7,7 +7,8 @@
         "Unity.Mathematics",
         "Unity.Loader",
         "Unity.Model",
-        "YooAsset"
+        "YooAsset",
+        "IngameDebugConsole.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

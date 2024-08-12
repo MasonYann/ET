@@ -56,7 +56,9 @@ namespace ET
             // 强制刷新一下，防止关闭auto refresh，编译出老代码
             AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
 
+            //刷新代码模式：客户端，服务端，客户端服务端双端
             RefreshCodeMode();
+            //刷新编译类型：Debug 类型，Release 类型
             RefreshBuildType();
 
             bool isCompileOk = CompileDlls();
@@ -65,7 +67,9 @@ namespace ET
                 return;
             }
 
+            //复制编译好的要热更的 dll 到热更文件夹
             CopyHotUpdateDlls();
+            //重新生成工程文件
             BuildHelper.ReGenerateProjectFiles();
             
             Log.Info($"Compile Finish!");

@@ -3,6 +3,11 @@ namespace ET.Server
 
     public static partial class RoomMessageHelper
     {
+        /// <summary>
+        /// 广播房间消息。
+        /// </summary>
+        /// <param name="room"></param>
+        /// <param name="message"></param>
         public static void BroadCast(Room room, IMessage message)
         {
             // 广播的消息不能被池回收

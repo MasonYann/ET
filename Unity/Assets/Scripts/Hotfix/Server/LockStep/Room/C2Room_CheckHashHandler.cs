@@ -1,12 +1,13 @@
 namespace ET.Server
 {
     [MessageHandler(SceneType.RoomRoot)]
-    public class C2Room_CheckHashHandler: MessageHandler<Scene, C2Room_CheckHash>
+    public class C2Room_CheckHashHandler : MessageHandler<Scene, C2Room_CheckHash>
     {
         protected override async ETTask Run(Scene root, C2Room_CheckHash message)
         {
             Room room = root.GetComponent<Room>();
             long hash = room.FrameBuffer.GetHash(message.Frame);
+            //检测帧数据 Hash 失败
             if (message.Hash != hash)
             {
                 byte[] bytes = room.FrameBuffer.Snapshot(message.Frame).ToArray();
@@ -15,6 +16,7 @@ namespace ET.Server
                 room2CCheckHashFail.LSWorldBytes = bytes;
                 room.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(message.PlayerId, room2CCheckHashFail);
             }
+
             await ETTask.CompletedTask;
         }
     }

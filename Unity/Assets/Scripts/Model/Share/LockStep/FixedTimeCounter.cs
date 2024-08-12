@@ -1,5 +1,8 @@
 namespace ET
 {
+    /// <summary>
+    /// 固定时间间隔组件，用于计算帧时间。
+    /// </summary>
     public class FixedTimeCounter: Object
     {
         private long startTime;

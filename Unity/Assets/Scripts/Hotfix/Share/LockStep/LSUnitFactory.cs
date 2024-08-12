@@ -10,6 +10,7 @@
 	        lsUnit.Position = unitInfo.Position;
 	        lsUnit.Rotation = unitInfo.Rotation;
 
+	        //Unit 挂载输入组件
 			lsUnit.AddComponent<LSInputComponent>();
             return lsUnit;
         }

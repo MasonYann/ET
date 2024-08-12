@@ -14,6 +14,7 @@ namespace ET.Client
             // 等待表现层订阅的事件完成
             await EventSystem.Instance.PublishAsync(root, new LSSceneChangeStart() {Room = room});
 
+            //通知服务器，场景切换完成
             root.GetComponent<ClientSenderComponent>().Send(C2Room_ChangeSceneFinish.Create());
             
             // 等待Room2C_EnterMap消息
@@ -49,7 +50,7 @@ namespace ET.Client
             EventSystem.Instance.Publish(root, new LSSceneInitFinish());
         }
         
-        // 场景切换协程
+        // 场景切换协程，断线重连
         public static async ETTask SceneChangeToReconnect(Scene root, G2C_Reconnect message)
         {
             root.RemoveComponent<Room>();

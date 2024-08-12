@@ -4,6 +4,7 @@ namespace ET.Client
 {
     public static partial class LSClientHelper
     {
+        //组件回滚
         public static void RunLSRollbackSystem(Entity entity)
         {
             if (entity is LSEntity)
@@ -52,6 +53,7 @@ namespace ET.Client
                 room.Update(oneFrameInputs);
             }
             
+            //Room 身上挂载的组件回滚
             RunLSRollbackSystem(room);
         }
         
@@ -62,6 +64,10 @@ namespace ET.Client
                 return;
             }
             long hash = self.FrameBuffer.GetHash(frame);
+            //发送哈希值而不是整个数据集可以节省网络带宽。
+            //只有当哈希值不匹配时，才需要发送完整的数据更新。
+            //计算哈希值通常比直接发送大量数据更快。
+            //客户端可以通过快速比较哈希值来确定是否需要请求最新数据。
             C2Room_CheckHash c2RoomCheckHash = C2Room_CheckHash.Create();
             c2RoomCheckHash.Frame = frame;
             c2RoomCheckHash.Hash = hash;
