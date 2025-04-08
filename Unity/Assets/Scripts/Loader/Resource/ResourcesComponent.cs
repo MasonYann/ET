@@ -5,6 +5,19 @@ using YooAsset;
 
 namespace ET
 {
+    // 用于字符串转换，减少GC
+    [FriendOf(typeof(ResourcesComponent))]
+    public static class AssetBundleHelper
+    {
+        public static string StringToAB(this string value)
+        {
+            string result =  $"Assets/Bundles/UI/Dlg/{value}.prefab";
+            return result;
+        }
+
+    }
+
+    
     /// <summary>
     /// 远端资源地址查询服务类
     /// </summary>
@@ -129,6 +142,14 @@ namespace ET
             package.UnloadUnusedAssets();
         }
 
+        public  T LoadAssetSync<T>(string location) where T: UnityEngine.Object
+        {
+            AssetHandle handle = YooAssets.LoadAssetSync<T>(location);
+            T t = (T)handle.AssetObject;
+            handle.Release();
+            return t;
+        }
+        
         /// <summary>
         /// 主要用来加载dll config aotdll，因为这时候纤程还没创建，无法使用ResourcesLoaderComponent。
         /// 游戏中的资源应该使用ResourcesLoaderComponent来加载

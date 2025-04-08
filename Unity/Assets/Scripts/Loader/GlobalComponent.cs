@@ -23,5 +23,11 @@ namespace ET
         public Transform UI;
 
         public GlobalConfig GlobalConfig { get; set; }
+        
+        public Transform NormalRoot{ get; set; }
+        public Transform PopUpRoot{ get; set; }
+        public Transform FixedRoot{ get; set; }
+        public Transform PoolRoot{ get; set; }
+        public Transform OtherRoot{ get; set; }
     }
 }
