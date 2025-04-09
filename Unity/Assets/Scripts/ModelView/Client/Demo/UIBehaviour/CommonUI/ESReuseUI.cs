@@ -5,7 +5,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ESReuseUI : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ESReuseUI : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic 
 	{
 		public UnityEngine.UI.Image EImage_testImage
      	{
@@ -47,8 +47,7 @@ namespace ET.Client
 			this.m_ELabel_testText = null;
 			this.uiTransform = null;
 		}
-		
-		
+
 		private UnityEngine.UI.Image m_EImage_testImage = null;
 		private UnityEngine.UI.Text m_ELabel_testText = null;
 		public Transform uiTransform = null;

@@ -11,10 +11,13 @@ namespace ET.Client
         {
             GlobalComponent globalComponent = root.AddComponent<GlobalComponent>();
             root.AddComponent<UIGlobalComponent>();
+            root.AddComponent<UIPathComponent>();
+            root.AddComponent<UIEventComponent>();
             root.AddComponent<UIComponent>();
             root.AddComponent<ResourcesLoaderComponent>();
             root.AddComponent<PlayerComponent>();
             root.AddComponent<CurrentScenesComponent>();
+            await root.AddComponent<RedDotComponent>().PreLoadGameObject();
             
             // 根据配置修改掉Main Fiber的SceneType
             SceneType sceneType = EnumHelper.FromString<SceneType>(globalComponent.GlobalConfig.AppType.ToString());

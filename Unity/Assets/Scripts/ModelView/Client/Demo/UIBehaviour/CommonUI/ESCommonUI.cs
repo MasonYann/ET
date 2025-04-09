@@ -5,7 +5,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ESCommonUI : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ESCommonUI : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic 
 	{
 		public UnityEngine.UI.Image EImage_Test1Image
      	{

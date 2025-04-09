@@ -189,13 +189,12 @@ namespace ET.Client
             UIBaseWindow baseWindow = self.GetUIBaseWindow(id);
             try
             {
-                Log.Debug(baseWindow.ToString());
-
                 baseWindow = await self.ShowBaseWindowAsync(id, showData);
 
                 if (null != baseWindow)
                 {
                     self.RealShowWindow(baseWindow, id, showData);
+                    Log.Debug(baseWindow.ToString());
                 }
             }
             catch (Exception e)
@@ -324,8 +323,12 @@ namespace ET.Client
 
                 if (null == baseWindow)
                 {
+                    Log.Debug($"UIBaseWindow WindowId {id} is null!!!");
+                    // Log.Debug(self.Root().GetComponent<UIPathComponent>().ToString());
                     if (self.Root().GetComponent<UIPathComponent>().WindowPrefabPath.ContainsKey((int)id))
                     {
+                        Log.Debug("UIPathComponent");
+
                         baseWindow = self.AddChild<UIBaseWindow>();
                         baseWindow.WindowID = id;
                         await self.PreLoadWindowsItemAsync(baseWindow.WindowID);
@@ -546,6 +549,8 @@ namespace ET.Client
 
             self.Root().GetComponent<UIEventComponent>().GetUIEventHandler(baseWindow.WindowID).OnInitWindowCoreData(baseWindow);
 
+            Log.Debug($"{baseWindow.windowType} LoadBaseWindowsAsync");
+            
             baseWindow?.SetRoot(EUIRootHelper.GetTargetRoot(self.Root(), baseWindow.windowType));
             baseWindow.uiTransform.SetAsLastSibling();
 
