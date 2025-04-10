@@ -7,25 +7,6 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgLoginViewComponent : Entity,IAwake,IDestroy 
 	{
-		public ESReuseUI ESReuseUI
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			ESReuseUI value = this.m_esreuseui;
-     			if( value == null )
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Sprite_BackGround/ESReuseUI");
-		    	   this.m_esreuseui = this.AddChild<ESReuseUI,Transform>(subTrans,true);
-     			}
-     			return this.m_esreuseui;
-     		}
-     	}
-
 		public UnityEngine.UI.Button ELoginButton
      	{
      		get
@@ -147,7 +128,6 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_esreuseui = null;
 			this.m_ELoginButton = null;
 			this.m_ELoginImage = null;
 			this.m_EAccountInputField = null;
@@ -158,7 +138,6 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private EntityRef<ESReuseUI> m_esreuseui = null;
 		private UnityEngine.UI.Button m_ELoginButton = null;
 		private UnityEngine.UI.Image m_ELoginImage = null;
 		private UnityEngine.UI.InputField m_EAccountInputField = null;

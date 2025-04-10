@@ -372,13 +372,6 @@ namespace ET.Client
         /// <returns></returns>
         private static UIBaseWindow GetUIBaseWindow(this UIComponent self, WindowID id)
         {
-            Log.Info(self.AllWindowsDic.Count.ToString());
-            foreach (var entityRef in self.AllWindowsDic)
-            {
-                Entity entity = entityRef.Value;
-                Log.Info(entityRef.Key.ToString() + "  " + entity.ToString());
-            }
-
             if (self.AllWindowsDic.ContainsKey((int)id))
             {
                 return self.AllWindowsDic[(int)id];
@@ -548,8 +541,6 @@ namespace ET.Client
             baseWindow.UIPrefabGameObject.name = go.name;
 
             self.Root().GetComponent<UIEventComponent>().GetUIEventHandler(baseWindow.WindowID).OnInitWindowCoreData(baseWindow);
-
-            Log.Debug($"{baseWindow.windowType} LoadBaseWindowsAsync");
             
             baseWindow?.SetRoot(EUIRootHelper.GetTargetRoot(self.Root(), baseWindow.windowType));
             baseWindow.uiTransform.SetAsLastSibling();

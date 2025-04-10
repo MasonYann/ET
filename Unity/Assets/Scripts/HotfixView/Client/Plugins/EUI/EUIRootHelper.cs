@@ -15,7 +15,6 @@ namespace ET.Client
         {
             if (type == UIWindowType.Normal)
             {
-                Log.Debug(root.GetComponent<GlobalComponent>().NormalRoot.ToString());
                 return root.GetComponent<GlobalComponent>().NormalRoot;
             }
             else if (type == UIWindowType.Fixed)

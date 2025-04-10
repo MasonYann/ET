@@ -36,7 +36,23 @@ namespace ET.Client
             self.Dispose();
         }
 
-        public static async ETTask<long> LoginAsync(this ClientSenderComponent self, string account, string password)
+        // public static async ETTask<long> LoginAsync(this ClientSenderComponent self, string account, string password)
+        // {
+        //     //创建网络纤程，并获取网络纤程 Id
+        //     self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
+        //     //实例化进程纤程 Id 实例
+        //     self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);
+        //
+        //     //主纤程发送到网络纤程登录的消息，由于是多进程多线程，所以需要知道网络纤程的进程 Id 和进程中的纤程 Id
+        //     Main2NetClient_Login main2NetClientLogin = Main2NetClient_Login.Create();
+        //     main2NetClientLogin.OwnerFiberId = self.Fiber().Id;
+        //     main2NetClientLogin.Account = account;
+        //     main2NetClientLogin.Password = password;
+        //     NetClient2Main_Login response = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientLogin) as NetClient2Main_Login;
+        //     return response.PlayerId;
+        // }
+        
+        public static async ETTask<NetClient2Main_Login> LoginAsync(this ClientSenderComponent self, string account, string password)
         {
             //创建网络纤程，并获取网络纤程 Id
             self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
@@ -46,11 +62,23 @@ namespace ET.Client
             //主纤程发送到网络纤程登录的消息，由于是多进程多线程，所以需要知道网络纤程的进程 Id 和进程中的纤程 Id
             Main2NetClient_Login main2NetClientLogin = Main2NetClient_Login.Create();
             main2NetClientLogin.OwnerFiberId = self.Fiber().Id;
-            main2NetClientLogin.Account = account;
-            main2NetClientLogin.Password = password;
+            main2NetClientLogin.Account      = account;
+            main2NetClientLogin.Password     = password;
             NetClient2Main_Login response = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientLogin) as NetClient2Main_Login;
-            return response.PlayerId;
+            return response;
         }
+        
+        public static async ETTask<NetClient2Main_LoginGame> LoginGameAsync(this ClientSenderComponent self, string account, long key,long roleId,string address)
+        {
+            Main2NetClient_LoginGame main2NetClientLoginGame = Main2NetClient_LoginGame.Create();
+            main2NetClientLoginGame.RealmKey    = key;
+            main2NetClientLoginGame.Account     = account;
+            main2NetClientLoginGame.RoleId      = roleId;
+            main2NetClientLoginGame.GateAddress = address;
+            NetClient2Main_LoginGame response = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientLoginGame) as NetClient2Main_LoginGame;
+            return response;
+        }
+
 
         public static void Send(this ClientSenderComponent self, IMessage message)
         {

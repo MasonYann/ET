@@ -24,6 +24,8 @@ namespace ET
         
         public StartSceneConfig Benchmark;
         
+        public StartSceneConfig LoginCenterConfig;
+        
         public List<StartSceneConfig> GetByProcess(int process)
         {
             return this.ProcessScenes[process];

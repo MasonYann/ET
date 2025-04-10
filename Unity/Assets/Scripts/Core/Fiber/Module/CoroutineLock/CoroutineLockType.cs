@@ -11,7 +11,17 @@ namespace ET
         public const int Resources = 6;
         public const int ResourcesLoader = 7;
         
-        public const int LoadUIBaseWindows = 8;
+        public const int LoadUIBaseWindows = 8;         //EUI 加载携程锁
+        
+        public const int LoginAccount = 9;              //账号登录携程锁
+        
+        public const int LoginCenterLock = 10;           //登录中心服
+
+        public const int LoginGate = 11;                //登录网关
+
+        public const int CreateRole = 12;               //创建角色
+        
+        public const int UnitCacheGet = 12;               //数据缓存服获取数据库信息
 
         public const int Max = 100; // 这个必须最大
     }

@@ -14,6 +14,10 @@
         public const int AITimer = 202;
         public const int SessionAcceptTimeout = 203;
         
+        public const int AccountSessionCheckOutTime = 204;  //Session 连接超时检测（默认十分钟）
+
+        public const int PlayerOfflineOutTime = 205;        //Gate 网关连接超时检测（默认十秒钟）
+        
         public const int RoomUpdate = 301;
     }
 }
