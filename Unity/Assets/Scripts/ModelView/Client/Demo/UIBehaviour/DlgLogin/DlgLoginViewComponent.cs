@@ -109,23 +109,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopHorizontalScrollRect ELoopTestLoopHorizontalScrollRect
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_ELoopTestLoopHorizontalScrollRect == null )
-     			{
-		    		this.m_ELoopTestLoopHorizontalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopHorizontalScrollRect>(this.uiTransform.gameObject,"ELoopTest");
-     			}
-     			return this.m_ELoopTestLoopHorizontalScrollRect;
-     		}
-     	}
-
 		public void DestroyWidget()
 		{
 			this.m_ELoginButton = null;
@@ -134,7 +117,6 @@ namespace ET.Client
 			this.m_EAccountImage = null;
 			this.m_EPasswordInputField = null;
 			this.m_EPasswordImage = null;
-			this.m_ELoopTestLoopHorizontalScrollRect = null;
 			this.uiTransform = null;
 		}
 
@@ -144,7 +126,6 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_EAccountImage = null;
 		private UnityEngine.UI.InputField m_EPasswordInputField = null;
 		private UnityEngine.UI.Image m_EPasswordImage = null;
-		private UnityEngine.UI.LoopHorizontalScrollRect m_ELoopTestLoopHorizontalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

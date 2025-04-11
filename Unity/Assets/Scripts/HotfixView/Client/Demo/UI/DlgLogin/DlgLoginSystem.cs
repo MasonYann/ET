@@ -6,36 +6,33 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-	[FriendOf(typeof(DlgLogin))]
-	public static  class DlgLoginSystem
-	{
+    [FriendOf(typeof(DlgLogin))]
+    public static class DlgLoginSystem
+    {
+        public static void RegisterUIEvent(this DlgLogin self)
+        {
+            self.View.ELoginButton.AddListener(self.Root(), self.OnLoginClickHandler);
+        }
 
-		public static void RegisterUIEvent(this DlgLogin self)
-		{
-			self.View.ELoginButton.AddListener(self.Root(), self.OnLogin);
-			self.View.ELoopTestLoopHorizontalScrollRect.AddItemRefreshListener(self.OnLoop);
-		}
+        public static void ShowWindow(this DlgLogin self, Entity contextData = null)
+        {
+            self.View.EAccountInputField.text = "Zy123456";
+            self.View.EPasswordInputField.text = "Zy123456";
+        }
 
-		public static void ShowWindow(this DlgLogin self, Entity contextData = null)
-		{
-			self.AddUIScrollItems(ref self.Dictionary,100);
-			self.View.ELoopTestLoopHorizontalScrollRect.SetVisible(true,100);
-		}
-
-		public static void OnLoop(this DlgLogin self, Transform transform, int index)
-		{
-			Scroll_Item_test test = self.Dictionary[index].BindTrans(transform);
-			test.ELabel_ContentText.text = index.ToString();
-		}
-
-		public static void OnLogin(this DlgLogin self)
-		{
-			LoginHelper.Login(
-				self.Root(), 
-				self.View.EAccountInputField.text, 
-				self.View.EPasswordInputField.text).Coroutine();
-		}
-		 
-
-	}
+        public static void OnLoginClickHandler(this DlgLogin self)
+        {
+            try
+            {
+                //调用登录方法
+                LoginHelper.Login(self.Root(),
+                    self.View.EAccountInputField.text,
+                    self.View.EPasswordInputField.text).Coroutine();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.ToString());
+            }
+        }
+    }
 }
