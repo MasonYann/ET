@@ -13,6 +13,7 @@ namespace ET.Server
 	    private static void Awake(this DBComponent self, string dbConnection, string dbName)
 		{
 			self.mongoClient = new MongoClient(dbConnection);
+            Log.Info($"db connection: {dbConnection}, db name: {dbName}");
 			self.database = self.mongoClient.GetDatabase(dbName);
 		}
 

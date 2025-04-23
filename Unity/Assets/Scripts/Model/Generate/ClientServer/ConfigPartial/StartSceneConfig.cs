@@ -24,7 +24,10 @@ namespace ET
         
         public StartSceneConfig Benchmark;
         
+        //登录中心服
         public StartSceneConfig LoginCenterConfig;
+        //数据缓存服
+        public StartSceneConfig UnitCacheConfig;
         
         public List<StartSceneConfig> GetByProcess(int process)
         {
@@ -70,6 +73,12 @@ namespace ET
                         break;
                     case SceneType.BenchmarkServer:
                         this.Benchmark = startSceneConfig;
+                        break;
+                    case SceneType.LoginCenter:
+                        this.LoginCenterConfig = startSceneConfig;
+                        break;
+                    case SceneType.UnitCache:
+                        this.UnitCacheConfig = startSceneConfig;
                         break;
                 }
             }
