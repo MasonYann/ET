@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net;
 
@@ -39,6 +40,41 @@ namespace ET
             return this.ClientScenesByName[zone][name];
         }
 
+        public StartSceneConfig GetOneBySceneType(int id, SceneType sceneType)
+        {
+            if (this.dict == null || this.dict.Count <= 0)
+            {
+                return null;
+            }
+
+            List<StartSceneConfig> matchingItems = new List<StartSceneConfig>();
+
+            foreach (var vConfig in this.dict)
+            {
+                Log.Debug($"{vConfig.Key}\t{vConfig.Value.SceneType}\t{vConfig.Value.ActorId}");
+                if (vConfig.Value.SceneType == sceneType.ToString())
+                {
+                    matchingItems.Add(vConfig.Value);
+                }
+            }
+            Log.Debug(matchingItems.Count.ToString() + id.ToString());
+            
+            if (matchingItems.Count < id)
+            {
+                throw new Exception($"配置找不到，配置表名: {nameof(StartSceneConfig)}，配置id: {id}，由于数组越界，配置中找不到目标 id 对应的配置表！");
+            }
+
+            
+            StartSceneConfig item = matchingItems[id - 1];
+
+            if (item == null)
+            {
+                throw new Exception($"配置找不到，配置表名: {nameof(StartSceneConfig)}，配置id: {id}");
+            }
+
+            return item;
+        }
+        
         public override void EndInit()
         {
             foreach (StartSceneConfig startSceneConfig in this.GetAll().Values)

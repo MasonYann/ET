@@ -18,6 +18,8 @@
 
         public const int PlayerOfflineOutTime = 205;        //Gate 网关连接超时检测（默认十秒钟）
         
+        public const int SaveChangeDBData = 206;            //UnitCache 数据缓存服保存数据到数据库
+        
         public const int RoomUpdate = 301;
     }
 }
