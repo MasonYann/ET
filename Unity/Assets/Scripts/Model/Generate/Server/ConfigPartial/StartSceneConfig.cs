@@ -111,6 +111,12 @@ namespace ET
                     case SceneType.BenchmarkServer:
                         this.Benchmark = startSceneConfig;
                         break;
+                    case SceneType.LoginCenter:
+                        this.LoginCenterConfig = startSceneConfig;
+                        break;
+                    case SceneType.UnitCache:
+                        this.UnitCacheConfig = startSceneConfig;
+                        break;
                 }
             }
         }
