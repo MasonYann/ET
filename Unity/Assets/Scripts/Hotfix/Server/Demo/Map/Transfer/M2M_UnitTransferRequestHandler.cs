@@ -9,6 +9,7 @@ namespace ET.Server
         protected override async ETTask Run(Scene scene, M2M_UnitTransferRequest request, M2M_UnitTransferResponse response)
         {
             UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
+            //从数据库加载出 Unit
             Unit unit = MongoHelper.Deserialize<Unit>(request.Unit);
 
             unitComponent.AddChild(unit);

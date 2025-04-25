@@ -83,14 +83,13 @@ namespace ET.Server
                         await dbComponent.Save<Account>(account);
                     }
                     
-                    
+                    //发送消息给 LoginCenter 账号中心服务器，查看账号登录状态
                     R2L_LoginAccountRequest r2LLoginAccountRequest = R2L_LoginAccountRequest.Create();
                     r2LLoginAccountRequest.AccountName = request.AccountName;
 
 
                     StartSceneConfig loginCenterConfig = StartSceneConfigCategory.Instance.LoginCenterConfig;
-                    var loginAccountResponse =  await session.Fiber().Root.GetComponent<MessageSender>()
-                                               .Call(loginCenterConfig.ActorId, r2LLoginAccountRequest) as L2R_LoginAccountRequest;
+                    var loginAccountResponse =  await session.Fiber().Root.GetComponent<MessageSender>().Call(loginCenterConfig.ActorId, r2LLoginAccountRequest) as L2R_LoginAccountRequest;
                     
                     if (loginAccountResponse.Error != ErrorCode.ERR_Success)
                     {
@@ -100,13 +99,16 @@ namespace ET.Server
                         return;
                     }
 
+                    //获取并断开当前账户旧 Session 连接
                     Session otherSession  = session.Root().GetComponent<AccountSessionsComponent>().Get(request.AccountName);
                    
                     otherSession?.Send( A2C_Disconnect.Create());
                     otherSession?.Disconnect().Coroutine();
+                    //添加当前 Session 到账号的 Session 组件中
                     session.Root().GetComponent<AccountSessionsComponent>().Add(request.AccountName, session);
                     session.AddComponent<AccountCheckOutTimeComponent, string>(request.AccountName);
 
+                    //生成一个随机Token，移除旧 Token，添加新 Token 到 Token 组件中
                     string Token = TimeInfo.Instance.ServerNow().ToString() + RandomGenerator.RandomNumber(int.MinValue, int.MaxValue).ToString();
                     session.Root().GetComponent<TokenComponent>().Remove(request.AccountName);
                     session.Root().GetComponent<TokenComponent>().Add(request.AccountName, Token);

@@ -2,25 +2,13 @@ namespace ET.Client
 {
     public static class LoginHelper
     {
-        // public static async ETTask Login(Scene root, string account, string password)
-        // {
-        //     root.RemoveComponent<ClientSenderComponent>();
-        //     
-        //     ClientSenderComponent clientSenderComponent = root.AddComponent<ClientSenderComponent>();
-        //     
-        //     long playerId = await clientSenderComponent.LoginAsync(account, password);
-        //
-        //     root.GetComponent<PlayerComponent>().MyId = playerId;
-        //     
-        //     await EventSystem.Instance.PublishAsync(root, new LoginFinish());
-        // }
-
         public static async ETTask Login(Scene root, string account, string password)
         {
             root.RemoveComponent<ClientSenderComponent>();
 
             ClientSenderComponent clientSenderComponent = root.AddComponent<ClientSenderComponent>();
 
+            //获取登录 Realm 服务器的 Token
             var response = await clientSenderComponent.LoginAsync(account, password);
             if (response.Error != ErrorCode.ERR_Success)
             {
@@ -98,8 +86,7 @@ namespace ET.Client
             }
 
             //请求游戏角色进入Map地图
-            NetClient2Main_LoginGame netClient2MainLoginGame =
-                    await clientSenderComponent.LoginGameAsync(account, r2CGetRealmKey.Key, roleInfoProto.Id, r2CGetRealmKey.Address);
+            NetClient2Main_LoginGame netClient2MainLoginGame = await clientSenderComponent.LoginGameAsync(account, r2CGetRealmKey.Key, roleInfoProto.Id, r2CGetRealmKey.Address);
             if (netClient2MainLoginGame.Error != ErrorCode.ERR_Success)
             {
                 Log.Error($"进入游戏失败：{netClient2MainLoginGame.Error}");
