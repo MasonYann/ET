@@ -37,10 +37,20 @@
             }
 
             //entity 的 Id 和 unitId 一致
-            if (self.CacheComponentDic.TryGetValue(entity.Id, out EntityRef<Entity> oldEntityRef))
+            // if (self.CacheComponentDic.TryGetValue(entity.Id, out EntityRef<Entity> oldEntityRef))
+            // {
+            //     //如果之前保存的 entity 与新的 entity 不同，就释放并移除他
+            //     Entity oldEntity = oldEntityRef;
+            //     if (entity != oldEntity)
+            //     {
+            //         oldEntity.Dispose();
+            //     }
+            //
+            //     self.CacheComponentDic.Remove(entity.Id);
+            // }
+            if (self.CacheComponentDic.TryGetValue(entity.Id, out Entity oldEntity))
             {
                 //如果之前保存的 entity 与新的 entity 不同，就释放并移除他
-                Entity oldEntity = oldEntityRef;
                 if (entity != oldEntity)
                 {
                     oldEntity.Dispose();
@@ -66,7 +76,20 @@
             //通过实体 Id 查询实体引用，
             //如果没有找到实体 Id 的数据，就从数据库中加载实体 Id 的数据到缓存服
             //如果获取到实体引用，就直接返回实体引用
-            if (!self.CacheComponentDic.TryGetValue(unitId, out EntityRef<Entity> entityRef))
+            // if (!self.CacheComponentDic.TryGetValue(unitId, out EntityRef<Entity> entityRef))
+            // {
+            //     entity = await self.Root().GetComponent<DBManagerComponent>().GetZoneDB(self.Zone()).Query<Entity>(unitId, self.key);
+            //     if (entity != null)
+            //     {
+            //         self.AddOrUpdate(entity);
+            //     }
+            // }
+            // else
+            // {
+            //     entity = entityRef;
+            // }
+            
+            if (!self.CacheComponentDic.TryGetValue(unitId, out Entity entityRef))
             {
                 entity = await self.Root().GetComponent<DBManagerComponent>().GetZoneDB(self.Zone()).Query<Entity>(unitId, self.key);
                 if (entity != null)
@@ -89,10 +112,16 @@
         /// <param name="id">实体 Id</param>
         public static void Delete(this UnitCache self, long id)
         {
-            if (self.CacheComponentDic.TryGetValue(id, out EntityRef<Entity> entityRef))
+            // if (self.CacheComponentDic.TryGetValue(id, out EntityRef<Entity> entityRef))
+            // {
+            //     self.CacheComponentDic.Remove(id);
+            //     Entity entity = entityRef;
+            //     entity.Dispose();
+            // }
+            
+            if (self.CacheComponentDic.TryGetValue(id, out Entity entity))
             {
                 self.CacheComponentDic.Remove(id);
-                Entity entity = entityRef;
                 entity.Dispose();
             }
         }

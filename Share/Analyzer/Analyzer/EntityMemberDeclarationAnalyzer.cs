@@ -125,7 +125,9 @@ namespace ET.Analyzer
                         {
                             continue;
                         }
-                        Diagnostic diagnostic = Diagnostic.Create(EntityFieldDeclarationInEntityAnalyzerRule.Rule, syntaxReference.GetSyntax().GetLocation(),namedTypeSymbol.Name,fieldSymbol.Name);
+                        Diagnostic diagnostic = Diagnostic.Create(
+                            
+                            EntityFieldDeclarationInEntityAnalyzerRule.Rule, syntaxReference.GetSyntax().GetLocation(),namedTypeSymbol.Name,fieldSymbol.Name);
                         context.ReportDiagnostic(diagnostic);
                     }
                     continue;
@@ -149,17 +151,18 @@ namespace ET.Analyzer
                     continue;
                 }
 
+                // 移除对字段类型是否为实体类参数的泛型类的检查
                 // 字段类型是否是含实体类参数的泛型类
-                if (namedTypeSymbol2.IsGenericType&&GenericTypeHasEntityTypeArgs(namedTypeSymbol2))
-                {
-                    var syntaxReference = fieldSymbol.DeclaringSyntaxReferences.FirstOrDefault();
-                    if (syntaxReference==null)
-                    {
-                        continue;
-                    }
-                    Diagnostic diagnostic = Diagnostic.Create(EntityFieldDeclarationInEntityAnalyzerRule.Rule, syntaxReference.GetSyntax().GetLocation(),namedTypeSymbol.Name,fieldSymbol.Name);
-                    context.ReportDiagnostic(diagnostic);
-                }
+                // if (namedTypeSymbol2.IsGenericType&&GenericTypeHasEntityTypeArgs(namedTypeSymbol2))
+                // {
+                //     var syntaxReference = fieldSymbol.DeclaringSyntaxReferences.FirstOrDefault();
+                //     if (syntaxReference==null)
+                //     {
+                //         continue;
+                //     }
+                //     Diagnostic diagnostic = Diagnostic.Create(EntityFieldDeclarationInEntityAnalyzerRule.Rule, syntaxReference.GetSyntax().GetLocation(),namedTypeSymbol.Name,fieldSymbol.Name);
+                //     context.ReportDiagnostic(diagnostic);
+                // }
                 
             }
         }
