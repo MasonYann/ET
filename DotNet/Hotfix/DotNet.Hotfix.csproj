@@ -35,7 +35,7 @@
 
         <Compile Include="..\..\Unity\Assets\Scripts\Hotfix\Share\**\*.cs">
             <Link>Share\%(RecursiveDir)%(FileName)%(Extension)</Link> 
-        </Compile> 
+        </Compile>
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\..\Share\Analyzer\Share.Analyzer.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />

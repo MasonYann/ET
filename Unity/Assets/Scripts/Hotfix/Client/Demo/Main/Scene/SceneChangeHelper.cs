@@ -18,9 +18,6 @@
             Wait_CreateMyUnit waitCreateMyUnit = await root.GetComponent<ObjectWait>().Wait<Wait_CreateMyUnit>();
             M2C_CreateMyUnit m2CCreateMyUnit = waitCreateMyUnit.Message;
             
-            // Log.Debug("currentScene" + currentScene.ToString());
-            // Log.Debug("m2CCreateMyUnit.Unit" + m2CCreateMyUnit.Unit.ToString());
-            
             Unit unit = UnitFactory.Create(currentScene, m2CCreateMyUnit.Unit);
             unitComponent.Add(unit);
             root.RemoveComponent<AIComponent>();
