@@ -12,11 +12,16 @@ namespace ET.Client
 
 		public static void RegisterUIEvent(this DlgMain self)
 		{
-		 
+		  self.View.E_PlayButton.AddListener(self.Root(), self.OnPlayClicked);
 		}
 
 		public static void ShowWindow(this DlgMain self, Entity contextData = null)
 		{
+		}
+
+		private static void OnPlayClicked(this DlgMain self)
+		{
+			
 		}
 
 		 

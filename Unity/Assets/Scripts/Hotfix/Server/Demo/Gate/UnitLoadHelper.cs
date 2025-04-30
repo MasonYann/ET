@@ -20,6 +20,8 @@
 
             //如果 unit 为空，说明玩家是新玩家
             bool isNewUnit = unit == null;
+            
+            Log.Debug(isNewUnit.ToString());
 
             //如果是新玩家，就创建一个 unit 数据
             if (isNewUnit)

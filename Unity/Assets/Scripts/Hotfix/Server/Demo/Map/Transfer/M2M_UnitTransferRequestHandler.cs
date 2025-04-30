@@ -23,7 +23,12 @@ namespace ET.Server
 
             unit.AddComponent<MoveComponent>();
             unit.AddComponent<PathfindingComponent, string>(scene.Name);
-            unit.Position = new float3(-10, 0, -10);
+            // unit.Position = new float3(-10, 0, -10);
+            unit.Position = new float3(0, 0, 0);
+            
+            NumericComponent numericComponent = unit.AddComponent<NumericComponent>();
+            numericComponent.Set(NumericType.Speed, 6f); // 速度是6米每秒
+            numericComponent.Set(NumericType.AOI, 15000); // 视野15米
 
             unit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
 
