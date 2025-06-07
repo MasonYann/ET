@@ -387,6 +387,11 @@ namespace ET.Client
         /// <param name="windowId"></param>
         public static void CloseWindow(this UIComponent self, WindowID windowId)
         {
+            foreach (var window in self.VisibleWindowsDic)
+            {
+                Log.Debug(window.ToString());
+            }
+            
             if (!self.VisibleWindowsDic.ContainsKey((int)windowId))
             {
                 return;
@@ -394,7 +399,7 @@ namespace ET.Client
 
             self.HideWindow(windowId);
             self.UnLoadWindow(windowId);
-            Debug.Log("<color=magenta>## close window without PopNavigationWindow() ##</color>");
+            Debug.Log($"<color=magenta>## close window without PopNavigationWindow() ##</color> {windowId}");
         }
 
         /// <summary>

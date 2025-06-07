@@ -7,7 +7,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgMainViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Button E_PlayButton
+		public UnityEngine.UI.Button E_CreateRoomButton
      	{
      		get
      		{
@@ -16,15 +16,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_PlayButton == null )
+     			if( this.m_E_CreateRoomButton == null )
      			{
-		    		this.m_E_PlayButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Group_Bottom/E_Play");
+		    		this.m_E_CreateRoomButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Group_Bottom/E_CreateRoom");
      			}
-     			return this.m_E_PlayButton;
+     			return this.m_E_CreateRoomButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_PlayImage
+		public UnityEngine.UI.Image E_CreateRoomImage
      	{
      		get
      		{
@@ -33,11 +33,79 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_PlayImage == null )
+     			if( this.m_E_CreateRoomImage == null )
      			{
-		    		this.m_E_PlayImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Group_Bottom/E_Play");
+		    		this.m_E_CreateRoomImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Group_Bottom/E_CreateRoom");
      			}
-     			return this.m_E_PlayImage;
+     			return this.m_E_CreateRoomImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_JoinRoomButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_JoinRoomButton == null )
+     			{
+		    		this.m_E_JoinRoomButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Group_Bottom/E_JoinRoom");
+     			}
+     			return this.m_E_JoinRoomButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_JoinRoomImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_JoinRoomImage == null )
+     			{
+		    		this.m_E_JoinRoomImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Group_Bottom/E_JoinRoom");
+     			}
+     			return this.m_E_JoinRoomImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_MatchButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MatchButton == null )
+     			{
+		    		this.m_E_MatchButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Group_Bottom/E_Match");
+     			}
+     			return this.m_E_MatchButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_MatchImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MatchImage == null )
+     			{
+		    		this.m_E_MatchImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Group_Bottom/E_Match");
+     			}
+     			return this.m_E_MatchImage;
      		}
      	}
 
@@ -128,8 +196,12 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_PlayButton = null;
-			this.m_E_PlayImage = null;
+			this.m_E_CreateRoomButton = null;
+			this.m_E_CreateRoomImage = null;
+			this.m_E_JoinRoomButton = null;
+			this.m_E_JoinRoomImage = null;
+			this.m_E_MatchButton = null;
+			this.m_E_MatchImage = null;
 			this.m_E_RoleLevelText = null;
 			this.m_E_GoldText = null;
 			this.m_E_ExpText = null;
@@ -138,8 +210,12 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_PlayButton = null;
-		private UnityEngine.UI.Image m_E_PlayImage = null;
+		private UnityEngine.UI.Button m_E_CreateRoomButton = null;
+		private UnityEngine.UI.Image m_E_CreateRoomImage = null;
+		private UnityEngine.UI.Button m_E_JoinRoomButton = null;
+		private UnityEngine.UI.Image m_E_JoinRoomImage = null;
+		private UnityEngine.UI.Button m_E_MatchButton = null;
+		private UnityEngine.UI.Image m_E_MatchImage = null;
 		private UnityEngine.UI.Text m_E_RoleLevelText = null;
 		private UnityEngine.UI.Text m_E_GoldText = null;
 		private UnityEngine.UI.Text m_E_ExpText = null;

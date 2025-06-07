@@ -21,6 +21,7 @@ namespace ET
         
         public List<StartSceneConfig> Maps = new();
 
+        //匹配服
         public StartSceneConfig Match;
 
         public StartSceneConfig Benchmark;
@@ -104,6 +105,7 @@ namespace ET
                         break;
                     case SceneType.Map:
                         this.Maps.Add(startSceneConfig);
+                        Log.Debug($"{startSceneConfig.Name}");
                         break;
                     case SceneType.Match:
                         this.Match = startSceneConfig;

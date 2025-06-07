@@ -12,7 +12,8 @@ namespace ET.Client
             {
                 Scene currentScene = root.CurrentScene();
 
-                await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Loading);
+                //加载loading界面
+                await root.GetComponent<CurrentScenesComponent>().Scene.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Loading);
                 
                 ResourcesLoaderComponent resourcesLoaderComponent = currentScene.GetComponent<ResourcesLoaderComponent>();
                 // 加载场景资源
@@ -20,8 +21,7 @@ namespace ET.Client
                 // 切换到map场景
 
                 //await SceneManager.LoadSceneAsync(currentScene.Name);
-
-                currentScene.AddComponent<OperaComponent>();
+                // currentScene.AddComponent<OperaComponent>();
             }
             catch (Exception e)
             {
