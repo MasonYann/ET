@@ -253,6 +253,36 @@ namespace ET.Client
             WindowID hideWindowId = self.GetWindowIdByGeneric<T>();
             self.HideWindow(hideWindowId);
         }
+        
+        /// <summary>
+        /// 预加载窗口资源。
+        /// </summary>
+        public static async ETTask PreLoadWindowAsync(this UIComponent self, WindowID id)
+        {
+            if (self.GetUIBaseWindow(id) != null)
+            {
+                return; // 已经加载过
+            }
+            UIBaseWindow baseWindow = self.GetUIBaseWindow(id);
+            try
+            {
+                baseWindow = await self.ShowBaseWindowAsync(id);
+                baseWindow.UIPrefabGameObject?.SetActive(false);
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+        }
+
+        /// <summary>
+        /// 泛型版本预加载方法。
+        /// </summary>
+        public static async ETTask PreLoadWindowAsync<T>(this UIComponent self) where T : Entity, IUILogic
+        {
+            WindowID id = self.GetWindowIdByGeneric<T>();
+            await self.PreLoadWindowAsync(id);
+        }
 
         /// <summary>
         /// 卸载指定的UI窗口实例

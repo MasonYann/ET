@@ -13,15 +13,12 @@ namespace ET.Client
                 Scene currentScene = root.CurrentScene();
 
                 //加载loading界面
-                await root.GetComponent<CurrentScenesComponent>().Scene.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Loading);
+                root.GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Loading);
+                // currentScene.GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Loading);
                 
                 ResourcesLoaderComponent resourcesLoaderComponent = currentScene.GetComponent<ResourcesLoaderComponent>();
                 // 加载场景资源
                 await resourcesLoaderComponent.LoadSceneAsync($"Assets/Bundles/Scenes/{currentScene.Name}.unity", LoadSceneMode.Single);
-                // 切换到map场景
-
-                //await SceneManager.LoadSceneAsync(currentScene.Name);
-                // currentScene.AddComponent<OperaComponent>();
             }
             catch (Exception e)
             {

@@ -25,7 +25,6 @@
             unitComponent.Add(unit);
             root.RemoveComponent<AIComponent>();
 
-            // Log.Debug($"currentScene 的 SceneType：{currentScene.SceneType}，currentScene 的 Name：{currentScene.Name}");
             EventSystem.Instance.Publish(currentScene, new SceneChangeFinish());
             // 通知等待场景切换的协程
             root.GetComponent<ObjectWait>().Notify(new Wait_SceneChangeFinish());
