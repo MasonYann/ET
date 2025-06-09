@@ -5,6 +5,10 @@ namespace ET.Client
 {
     public static partial class EnterMapHelper
     {
+        /// <summary>
+        /// 状态同步逻辑。
+        /// </summary>
+        /// <param name="root"></param>
         public static async ETTask EnterMapAsync(Scene root)
         {
             try
@@ -22,6 +26,10 @@ namespace ET.Client
             }	
         }
         
+        /// <summary>
+        /// 帧同步逻辑。
+        /// </summary>
+        /// <param name="fiber"></param>
         public static async ETTask Match(Fiber fiber)
         {
             try
