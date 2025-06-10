@@ -20,6 +20,8 @@ namespace ET
         public List<StartSceneConfig> Routers = new();
         
         public List<StartSceneConfig> Maps = new();
+        
+        // public List<StartSceneConfig> Rooms = new();
 
         //匹配服
         public StartSceneConfig Match;
@@ -105,7 +107,7 @@ namespace ET
                         break;
                     case SceneType.Map:
                         this.Maps.Add(startSceneConfig);
-                        Log.Debug($"{startSceneConfig.Name}");
+                        // Log.Debug($"{startSceneConfig.Name}");
                         break;
                     case SceneType.Match:
                         this.Match = startSceneConfig;
@@ -119,6 +121,9 @@ namespace ET
                     case SceneType.UnitCache:
                         this.UnitCacheConfig = startSceneConfig;
                         break;
+                    // case SceneType.Room:
+                    //     this.Rooms.Add(startSceneConfig);
+                        // break;
                 }
             }
         }

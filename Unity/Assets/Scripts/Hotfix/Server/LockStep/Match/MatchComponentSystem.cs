@@ -7,8 +7,14 @@ namespace ET.Server
     [FriendOf(typeof(MatchComponent))]
     public static partial class MatchComponentSystem
     {
+        /// <summary>
+        /// 匹配玩家，匹配成功后会发送 Match2G_NotifyMatchSuccess 消息给所有玩家，
+        /// 玩家收到消息后会发送 C2G_EnterMap 消息给 Map 服务器，Map 服务器会返回 G2M_EnterMap 消息给玩家，
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="playerId"></param>
         public static async ETTask Match(this MatchComponent self, long playerId)
-        {
+        { 
             if (self.waitMatchPlayers.Contains(playerId))
             {
                 return;

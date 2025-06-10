@@ -3,6 +3,9 @@ using TrueSync;
 
 namespace ET.Server
 {
+    /// <summary>
+    /// RoomRoot 服务器接收客户端发送过来的场景切换完成消息，等待所有玩家完成场景切换后开始游戏。
+    /// </summary>
     [MessageHandler(SceneType.RoomRoot)]
     [FriendOf(typeof (RoomServerComponent))]
     public class C2Room_ChangeSceneFinishHandler: MessageHandler<Scene, C2Room_ChangeSceneFinish>

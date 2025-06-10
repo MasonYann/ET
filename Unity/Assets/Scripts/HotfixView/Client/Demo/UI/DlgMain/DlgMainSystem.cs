@@ -34,7 +34,7 @@ namespace ET.Client
         private static async ETTask OnMatchClickAsync(this DlgMain self)
         {
             //匹配按钮的逻辑，需要判断是否已经在匹配中，如果在匹配中，就取消匹配，如果不在匹配中，就开始匹配
-            // await EnterMapHelper.Match(self.Fiber());
+            await EnterMapHelper.Match(self.Fiber());
             
             
         }
