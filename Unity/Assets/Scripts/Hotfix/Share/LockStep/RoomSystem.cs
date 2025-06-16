@@ -11,7 +11,7 @@ namespace ET
         {
             return entity.IScene as Room;
         }
-        
+
         public static void Init(this Room self, List<LockStepUnitInfo> unitInfos, long startTime, int frame = -1)
         {
             self.StartTime = startTime;
@@ -23,6 +23,7 @@ namespace ET
             self.FrameBuffer = new FrameBuffer(frame);
             //创建固定时间间隔组件
             self.FixedTimeCounter = new FixedTimeCounter(self.StartTime, 0, LSConstValue.UpdateInterval);
+
             //创建帧同步世界容器
             LSWorld lsWorld = self.LSWorld;
             lsWorld.Frame = frame + 1;
@@ -40,15 +41,41 @@ namespace ET
         public static void Update(this Room self, OneFrameInputs oneFrameInputs)
         {
             LSWorld lsWorld = self.LSWorld;
+            if (lsWorld == null)
+            {
+                Log.Debug("LSWorld 未初始化");
+                return;
+            }
+
             // 设置输入到每个LSUnit身上
             LSUnitComponent unitComponent = lsWorld.GetComponent<LSUnitComponent>();
+            if (unitComponent == null)
+            {
+                Log.Debug("LSUnitComponent 未正确添加到 LSWorld");
+                return;
+            }
+
             foreach (var kv in oneFrameInputs.Inputs)
             {
                 LSUnit lsUnit = unitComponent.GetChild<LSUnit>(kv.Key);
-                LSInputComponent lsInputComponent = lsUnit.GetComponent<LSInputComponent>();
+                if (lsUnit == null)
+                {
+                    Log.Debug($"LSUnit 未添加到 LSWorld {lsUnit.Id}");
+                    return;
+                }
+                
+                LSInputComponent lsInputComponent = null;
+                if (lsUnit.GetComponent<LSInputComponent>() == null)
+                {
+                    Log.Debug($"LSInputComponent 未添加到 LSUnit {lsUnit.Id}");
+                    continue;
+                }
+                lsInputComponent = lsUnit.GetComponent<LSInputComponent>();
+                Log.Debug($"LSInputComponent {lsInputComponent.ToString()}");
+
                 lsInputComponent.LSInput = kv.Value;
             }
-            
+
             if (!self.IsReplay)
             {
                 // 保存当前帧场景数据
@@ -58,12 +85,12 @@ namespace ET
 
             lsWorld.Update();
         }
-        
+
         public static LSWorld GetLSWorld(this Room self, SceneType sceneType, int frame)
         {
             MemoryBuffer memoryBuffer = self.FrameBuffer.Snapshot(frame);
             memoryBuffer.Seek(0, SeekOrigin.Begin);
-            LSWorld lsWorld = MemoryPackHelper.Deserialize(typeof (LSWorld), memoryBuffer) as LSWorld;
+            LSWorld lsWorld = MemoryPackHelper.Deserialize(typeof(LSWorld), memoryBuffer) as LSWorld;
             lsWorld.SceneType = sceneType;
             memoryBuffer.Seek(0, SeekOrigin.Begin);
             return lsWorld;
@@ -75,12 +102,12 @@ namespace ET
             MemoryBuffer memoryBuffer = self.FrameBuffer.Snapshot(frame);
             memoryBuffer.Seek(0, SeekOrigin.Begin);
             memoryBuffer.SetLength(0);
-            
+
             MemoryPackHelper.Serialize(self.LSWorld, memoryBuffer);
             memoryBuffer.Seek(0, SeekOrigin.Begin);
 
-            long hash = memoryBuffer.GetBuffer().Hash(0, (int) memoryBuffer.Length);
-            
+            long hash = memoryBuffer.GetBuffer().Hash(0, (int)memoryBuffer.Length);
+
             self.FrameBuffer.SetHash(frame, hash);
         }
 
@@ -91,6 +118,7 @@ namespace ET
             {
                 return;
             }
+
             OneFrameInputs oneFrameInputs = self.FrameBuffer.FrameInputs(frame);
             OneFrameInputs saveInput = OneFrameInputs.Create();
             oneFrameInputs.CopyTo(saveInput);

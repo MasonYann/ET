@@ -16,7 +16,10 @@ namespace ET.Client
                 room.AddComponent<LSOperaComponent>();
             }
 
-            room.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_LSLobby);
+            // room.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_LSLobby);
+            room.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Loading);
+            //TODO 加载战斗场景的 UI
+            
             await ETTask.CompletedTask;
         }
     }
