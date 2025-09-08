@@ -1,7 +1,10 @@
-﻿using System;
+using System;
 
 namespace ET.Server
 {
+    /// <summary>
+    /// 客户端请求进入游戏的处理器
+    /// </summary>
     [MessageSessionHandler(SceneType.Gate)]
     public class C2G_EnterGameHandler : MessageSessionHandler<C2G_EnterGame, G2C_EnterGame>
     {
@@ -34,27 +37,30 @@ namespace ET.Server
 
             long instanceId = session.InstanceId;
 
+            // 添加会话锁定组件，防止重复请求
             using (session.AddComponent<SessionLockingComponent>())
             {
+                // 使用协程锁，确保同一账号不会并发登录
                 using (await coroutineLockComponent.Wait(CoroutineLockType.LoginGate, player.Account.GetLongHashCode()))
                 {
+                    // 检查会话是否仍然有效
                     if (instanceId != session.InstanceId || player.IsDisposed)
                     {
                         response.Error = ErrorCode.ERR_PlayerSessionError;
-
                         return;
                     }
 
+                    // 检查玩家是否已经在游戏中
                     if (player.PlayerState == PlayerState.Game)
                     {
                         try
                         {
+                            // 处理二次登录逻辑
                             G2M_SecondLogin g2MSecondLogin = G2M_SecondLogin.Create();
                             IResponse reqEnter = await session.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(player.UnitId, g2MSecondLogin);
                             if (reqEnter.Error == ErrorCode.ERR_Success)
                             {
                                 Log.Console("作业:二次登陆逻辑，补全下发切换场景消息");
-
                                 return;
                             }
 
@@ -118,9 +124,9 @@ namespace ET.Server
         /// <summary>
         /// 登录邮件服。
         /// </summary>
-        /// <param name="player"></param>
-        /// <param name="unit"></param>
-        /// <returns></returns>
+        /// <param name="player">玩家实体</param>
+        /// <param name="unit">玩家单位</param>
+        /// <returns>错误码</returns>
         public static async ETTask<int> LoginMailServer(Player player, Unit unit)
         {
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(player.Zone(), "Mail");

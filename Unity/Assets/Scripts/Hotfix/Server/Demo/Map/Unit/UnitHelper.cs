@@ -13,11 +13,11 @@ namespace ET.Server
             NumericComponent nc = unit.GetComponent<NumericComponent>();
             
             // // 添加空值检查并记录日志
-            // if (nc == null)
-            // {
-            //     Log.Error($"NumericComponent is not found on Unit with Id: {unit.Id}");
-            //     nc = unit.AddComponent<NumericComponent>();
-            // }
+            if (nc == null)
+            {
+                Log.Error($"NumericComponent is not found on Unit with Id: {unit.Id}");
+                nc = unit.AddComponent<NumericComponent>();
+            }
 
             unitInfo.UnitId = unit.Id;
             unitInfo.ConfigId = unit.ConfigId;

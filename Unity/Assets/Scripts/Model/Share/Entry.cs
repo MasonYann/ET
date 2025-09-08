@@ -1,4 +1,4 @@
-﻿using MemoryPack;
+using MemoryPack;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Serializers;
 
@@ -36,13 +36,14 @@ namespace ET
             MongoRegister.Init();
             // 注册Entity序列化器
             EntitySerializeRegister.Init();
-            World.Instance.AddSingleton<IdGenerater>();
-            World.Instance.AddSingleton<OpcodeType>();
-            World.Instance.AddSingleton<ObjectPool>();
-            World.Instance.AddSingleton<MessageQueue>();
-            World.Instance.AddSingleton<NetServices>();
-            World.Instance.AddSingleton<NavmeshComponent>();
-            World.Instance.AddSingleton<LogMsg>();
+            // 添加框架核心组件单例
+            World.Instance.AddSingleton<IdGenerater>(); // ID生成器
+            World.Instance.AddSingleton<OpcodeType>(); // 操作码类型管理器
+            World.Instance.AddSingleton<ObjectPool>(); // 对象池管理器
+            World.Instance.AddSingleton<MessageQueue>(); // 消息队列
+            World.Instance.AddSingleton<NetServices>(); // 网络服务
+            World.Instance.AddSingleton<NavmeshComponent>(); // 导航网格组件
+            World.Instance.AddSingleton<LogMsg>(); // 日志消息组件
             
             // 创建需要reload的code singleton
             CodeTypes.Instance.CreateCode();

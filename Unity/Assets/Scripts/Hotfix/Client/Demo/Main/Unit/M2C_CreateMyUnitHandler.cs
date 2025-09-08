@@ -5,7 +5,7 @@
 	{
 		protected override async ETTask Run(Scene root, M2C_CreateMyUnit message)
 		{
-			Log.Debug("111");
+			// Log.Debug("111");
 			
 			// 通知场景切换协程继续往下走
 			root.GetComponent<ObjectWait>().Notify(new Wait_CreateMyUnit() {Message = message});
