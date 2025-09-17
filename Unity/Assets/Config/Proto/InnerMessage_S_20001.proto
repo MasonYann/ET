@@ -313,3 +313,55 @@ message UnitCache2Other_GetUnit // IResponse
 	repeated string ComponentNameList = 5; //缓存服中的实体Entity类型列表
 }
 
+//删除 Unit 缓存
+//ResponseType UnitCache2Other_DeleteUnit
+message Other2UnitCache_DeleteUnit //IRequest
+{
+	int32 RpcId = 90;
+
+	int64 UnitId = 1;
+}
+
+message UnitCache2Other_DeleteUnit //IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+
+//进入世界聊天服务器
+//ResponseType Chat2G_EnterChat
+message G2Chat_EnterChat // IRequest
+{
+    int32 RpcId = 90;
+	string Name  = 1;
+	int64 UnitId = 2;
+	int64 GateSessionActorId = 3;
+	
+}
+
+
+message Chat2G_EnterChat // IResponse
+{
+    int32 RpcId = 90;
+    int32 Error = 91;
+    string Message = 92;
+	int64 ChatInfoUnitInstanceId = 1;
+}
+
+
+//请求退出世界聊天服务器
+//ResponseType Chat2G_RequestExitChat
+message G2Chat_RequestExitChat // IRequest
+{
+    int32 RpcId = 90;
+}
+
+
+message Chat2G_RequestExitChat // IResponse
+{
+    int32 RpcId = 90;
+    int32 Error = 91;
+    string Message = 92;
+}
