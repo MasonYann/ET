@@ -7,28 +7,28 @@ using System.ComponentModel;
 namespace ET
 {
     [Config]
-    public partial class StartSceneConfigCategory : Singleton<StartSceneConfigCategory>, IMerge
+    public partial class BattleLevelConfigCategory : Singleton<BattleLevelConfigCategory>, IMerge
     {
         [BsonElement]
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-        private Dictionary<int, StartSceneConfig> dict = new();
+        private Dictionary<int, BattleLevelConfig> dict = new();
 		
         public void Merge(object o)
         {
-            StartSceneConfigCategory s = o as StartSceneConfigCategory;
+            BattleLevelConfigCategory s = o as BattleLevelConfigCategory;
             foreach (var kv in s.dict)
             {
                 this.dict.Add(kv.Key, kv.Value);
             }
         }
 		
-        public StartSceneConfig Get(int id)
+        public BattleLevelConfig Get(int id)
         {
-            this.dict.TryGetValue(id, out StartSceneConfig item);
+            this.dict.TryGetValue(id, out BattleLevelConfig item);
 
             if (item == null)
             {
-                throw new Exception($"配置找不到，配置表名: {nameof (StartSceneConfig)}，配置id: {id}");
+                throw new Exception($"配置找不到，配置表名: {nameof (BattleLevelConfig)}，配置id: {id}");
             }
 
             return item;
@@ -39,12 +39,12 @@ namespace ET
             return this.dict.ContainsKey(id);
         }
 
-        public Dictionary<int, StartSceneConfig> GetAll()
+        public Dictionary<int, BattleLevelConfig> GetAll()
         {
             return this.dict;
         }
 
-        public StartSceneConfig GetOne()
+        public BattleLevelConfig GetOne()
         {
             if (this.dict == null || this.dict.Count <= 0)
             {
@@ -57,22 +57,16 @@ namespace ET
         }
     }
 
-	public partial class StartSceneConfig: ProtoObject, IConfig
+	public partial class BattleLevelConfig: ProtoObject, IConfig
 	{
 		/// <summary>Id</summary>
 		public int Id { get; set; }
-		/// <summary>所属进程</summary>
-		public int Process { get; set; }
-		/// <summary>所属区</summary>
-		public int Zone { get; set; }
-		/// <summary>类型</summary>
-		public string SceneType { get; set; }
-		/// <summary>名字</summary>
-		public string Name { get; set; }
-		/// <summary>外网端口</summary>
-		public int OuterPort { get; set; }
-		/// <summary>外网端口</summary>
-		public int Port { get; set; }
+		/// <summary>怪物列表</summary>
+		public int[] MonsterIds { get; set; }
+		/// <summary>准入等级范围</summary>
+		public int[] MiniEnterLevel { get; set; }
+		/// <summary>战斗胜利获取的经验值</summary>
+		public int RewardExp { get; set; }
 
 	}
 }

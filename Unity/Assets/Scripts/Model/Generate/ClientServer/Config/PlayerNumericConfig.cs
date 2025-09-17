@@ -7,28 +7,28 @@ using System.ComponentModel;
 namespace ET
 {
     [Config]
-    public partial class StartSceneConfigCategory : Singleton<StartSceneConfigCategory>, IMerge
+    public partial class PlayerNumericConfigCategory : Singleton<PlayerNumericConfigCategory>, IMerge
     {
         [BsonElement]
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-        private Dictionary<int, StartSceneConfig> dict = new();
+        private Dictionary<int, PlayerNumericConfig> dict = new();
 		
         public void Merge(object o)
         {
-            StartSceneConfigCategory s = o as StartSceneConfigCategory;
+            PlayerNumericConfigCategory s = o as PlayerNumericConfigCategory;
             foreach (var kv in s.dict)
             {
                 this.dict.Add(kv.Key, kv.Value);
             }
         }
 		
-        public StartSceneConfig Get(int id)
+        public PlayerNumericConfig Get(int id)
         {
-            this.dict.TryGetValue(id, out StartSceneConfig item);
+            this.dict.TryGetValue(id, out PlayerNumericConfig item);
 
             if (item == null)
             {
-                throw new Exception($"配置找不到，配置表名: {nameof (StartSceneConfig)}，配置id: {id}");
+                throw new Exception($"配置找不到，配置表名: {nameof (PlayerNumericConfig)}，配置id: {id}");
             }
 
             return item;
@@ -39,12 +39,12 @@ namespace ET
             return this.dict.ContainsKey(id);
         }
 
-        public Dictionary<int, StartSceneConfig> GetAll()
+        public Dictionary<int, PlayerNumericConfig> GetAll()
         {
             return this.dict;
         }
 
-        public StartSceneConfig GetOne()
+        public PlayerNumericConfig GetOne()
         {
             if (this.dict == null || this.dict.Count <= 0)
             {
@@ -57,22 +57,20 @@ namespace ET
         }
     }
 
-	public partial class StartSceneConfig: ProtoObject, IConfig
+	public partial class PlayerNumericConfig: ProtoObject, IConfig
 	{
 		/// <summary>Id</summary>
 		public int Id { get; set; }
-		/// <summary>所属进程</summary>
-		public int Process { get; set; }
-		/// <summary>所属区</summary>
-		public int Zone { get; set; }
-		/// <summary>类型</summary>
-		public string SceneType { get; set; }
 		/// <summary>名字</summary>
 		public string Name { get; set; }
-		/// <summary>外网端口</summary>
-		public int OuterPort { get; set; }
-		/// <summary>外网端口</summary>
-		public int Port { get; set; }
+		/// <summary>初始基础值</summary>
+		public long BaseValue { get; set; }
+		/// <summary>是否用于展示</summary>
+		public int isNeedShow { get; set; }
+		/// <summary>是否用于加成点</summary>
+		public int isAddPoint { get; set; }
+		/// <summary>是否是百分比</summary>
+		public int isPrecent { get; set; }
 
 	}
 }

@@ -7,28 +7,28 @@ using System.ComponentModel;
 namespace ET
 {
     [Config]
-    public partial class StartSceneConfigCategory : Singleton<StartSceneConfigCategory>, IMerge
+    public partial class ItemConfigCategory : Singleton<ItemConfigCategory>, IMerge
     {
         [BsonElement]
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-        private Dictionary<int, StartSceneConfig> dict = new();
+        private Dictionary<int, ItemConfig> dict = new();
 		
         public void Merge(object o)
         {
-            StartSceneConfigCategory s = o as StartSceneConfigCategory;
+            ItemConfigCategory s = o as ItemConfigCategory;
             foreach (var kv in s.dict)
             {
                 this.dict.Add(kv.Key, kv.Value);
             }
         }
 		
-        public StartSceneConfig Get(int id)
+        public ItemConfig Get(int id)
         {
-            this.dict.TryGetValue(id, out StartSceneConfig item);
+            this.dict.TryGetValue(id, out ItemConfig item);
 
             if (item == null)
             {
-                throw new Exception($"配置找不到，配置表名: {nameof (StartSceneConfig)}，配置id: {id}");
+                throw new Exception($"配置找不到，配置表名: {nameof (ItemConfig)}，配置id: {id}");
             }
 
             return item;
@@ -39,12 +39,12 @@ namespace ET
             return this.dict.ContainsKey(id);
         }
 
-        public Dictionary<int, StartSceneConfig> GetAll()
+        public Dictionary<int, ItemConfig> GetAll()
         {
             return this.dict;
         }
 
-        public StartSceneConfig GetOne()
+        public ItemConfig GetOne()
         {
             if (this.dict == null || this.dict.Count <= 0)
             {
@@ -57,22 +57,26 @@ namespace ET
         }
     }
 
-	public partial class StartSceneConfig: ProtoObject, IConfig
+	public partial class ItemConfig: ProtoObject, IConfig
 	{
 		/// <summary>Id</summary>
 		public int Id { get; set; }
-		/// <summary>所属进程</summary>
-		public int Process { get; set; }
-		/// <summary>所属区</summary>
-		public int Zone { get; set; }
-		/// <summary>类型</summary>
-		public string SceneType { get; set; }
 		/// <summary>名字</summary>
 		public string Name { get; set; }
-		/// <summary>外网端口</summary>
-		public int OuterPort { get; set; }
-		/// <summary>外网端口</summary>
-		public int Port { get; set; }
+		/// <summary>名字</summary>
+		public string Desc { get; set; }
+		/// <summary>物品类型</summary>
+		public int Type { get; set; }
+		/// <summary>装配位置</summary>
+		public int EquipPosition { get; set; }
+		/// <summary>c图标</summary>
+		public string Icon { get; set; }
+		/// <summary>最大累加数量</summary>
+		public int MaxSumCount { get; set; }
+		/// <summary>s词条随机Id</summary>
+		public int EntryRandomId { get; set; }
+		/// <summary>售卖的基础价格</summary>
+		public int SellBasePrice { get; set; }
 
 	}
 }
