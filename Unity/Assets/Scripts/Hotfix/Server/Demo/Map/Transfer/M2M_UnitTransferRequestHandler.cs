@@ -21,9 +21,9 @@ namespace ET.Server
                 unit.AddComponent(entity);
             }
 
-            unit.AddComponent<MoveComponent>();
-            unit.AddComponent<PathfindingComponent, string>(scene.Name);
-            unit.Position = new float3(-10, 0, -10);
+            // unit.AddComponent<MoveComponent>();
+            // unit.AddComponent<PathfindingComponent, string>(scene.Name);
+            // unit.Position = new float3(-10, 0, -10);
 
             unit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
 
@@ -37,9 +37,26 @@ namespace ET.Server
             M2C_CreateMyUnit m2CCreateUnits = M2C_CreateMyUnit.Create();
             m2CCreateUnits.Unit = UnitHelper.CreateUnitInfo(unit);
             MapMessageHelper.SendToClient(unit, m2CCreateUnits);
+            
+            //通知客户端同步背包信息
+            // ItemUpdateNoticeHelper.SyncAllBagItems(unit);
+            // ItemUpdateNoticeHelper.SyncAllEquipItems(unit);
+			
+            //通知客户端同步打造信息
+            // ForgeHelper.SyncAllProduction(unit);
+			
+            //通知客户端同步任务信息
+            // TaskNoticeHelper.SyncAllTaskInfo(unit);
+			
+
+            //挂载数值组件
+            // unit.AddComponent<NumericNoticeComponent>();NumericComponent
+            //挂载战斗检测组件
+            // unit.AddComponent<AdventureCheckComponent>();
+
 
             // 加入aoi
-            unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
+            // unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
 
             // 解锁location，可以接收发给Unit的消息
             await scene.Root().GetComponent<LocationProxyComponent>().UnLock(LocationType.Unit, unit.Id, request.OldActorId, unit.GetActorId());
