@@ -3012,134 +3012,134 @@ namespace ET
         }
     }
 
-    // 客户端获取排行榜信息
-    [MemoryPackable]
-    [Message(OuterMessage.C2Rank_GetRanksInfo)]
-    [ResponseType(nameof(Rank2C_GetRanksInfo))]
-    public partial class C2Rank_GetRanksInfo : MessageObject, IActorRankInfoRequest
-    {
-        public static C2Rank_GetRanksInfo Create(bool isFromPool = false)
-        {
-            return ObjectPool.Instance.Fetch(typeof(C2Rank_GetRanksInfo), isFromPool) as C2Rank_GetRanksInfo;
-        }
-
-        [MemoryPackOrder(0)]
-        public int RpcId { get; set; }
-
-        public override void Dispose()
-        {
-            if (!this.IsFromPool)
-            {
-                return;
-            }
-
-            this.RpcId = default;
-
-            ObjectPool.Instance.Recycle(this);
-        }
-    }
-
-    // 排行榜服务器回复客户端排行榜信息
-    [MemoryPackable]
-    [Message(OuterMessage.Rank2C_GetRanksInfo)]
-    public partial class Rank2C_GetRanksInfo : MessageObject, IActorRankInfoResponse
-    {
-        public static Rank2C_GetRanksInfo Create(bool isFromPool = false)
-        {
-            return ObjectPool.Instance.Fetch(typeof(Rank2C_GetRanksInfo), isFromPool) as Rank2C_GetRanksInfo;
-        }
-
-        [MemoryPackOrder(89)]
-        public int RpcId { get; set; }
-
-        [MemoryPackOrder(90)]
-        public int Error { get; set; }
-
-        [MemoryPackOrder(91)]
-        public string Message { get; set; }
-
-        [MemoryPackOrder(0)]
-        public List<RankInfoProto> RankInfoProtoList { get; set; } = new();
-
-        public override void Dispose()
-        {
-            if (!this.IsFromPool)
-            {
-                return;
-            }
-
-            this.RpcId = default;
-            this.Error = default;
-            this.Message = default;
-            this.RankInfoProtoList.Clear();
-
-            ObjectPool.Instance.Recycle(this);
-        }
-    }
-
-    // 客户端发送聊天信息到聊天服务器
-    [MemoryPackable]
-    [Message(OuterMessage.C2Chat_SendChatInfo)]
-    [ResponseType(nameof(Chat2C_SendChatInfo))]
-    public partial class C2Chat_SendChatInfo : MessageObject, IActorChatInfoRequest
-    {
-        public static C2Chat_SendChatInfo Create(bool isFromPool = false)
-        {
-            return ObjectPool.Instance.Fetch(typeof(C2Chat_SendChatInfo), isFromPool) as C2Chat_SendChatInfo;
-        }
-
-        [MemoryPackOrder(0)]
-        public int RpcId { get; set; }
-
-        [MemoryPackOrder(1)]
-        public string ChatMessage { get; set; }
-
-        public override void Dispose()
-        {
-            if (!this.IsFromPool)
-            {
-                return;
-            }
-
-            this.RpcId = default;
-            this.ChatMessage = default;
-
-            ObjectPool.Instance.Recycle(this);
-        }
-    }
-
-    [MemoryPackable]
-    [Message(OuterMessage.Chat2C_SendChatInfo)]
-    public partial class Chat2C_SendChatInfo : MessageObject, IActorChatInfoResponse
-    {
-        public static Chat2C_SendChatInfo Create(bool isFromPool = false)
-        {
-            return ObjectPool.Instance.Fetch(typeof(Chat2C_SendChatInfo), isFromPool) as Chat2C_SendChatInfo;
-        }
-
-        [MemoryPackOrder(89)]
-        public int RpcId { get; set; }
-
-        [MemoryPackOrder(90)]
-        public int Error { get; set; }
-
-        [MemoryPackOrder(91)]
-        public string Message { get; set; }
-
-        public override void Dispose()
-        {
-            if (!this.IsFromPool)
-            {
-                return;
-            }
-
-            this.RpcId = default;
-            this.Error = default;
-            this.Message = default;
-
-            ObjectPool.Instance.Recycle(this);
-        }
-    }
+    // // 客户端获取排行榜信息
+    // [MemoryPackable]
+    // [Message(OuterMessage.C2Rank_GetRanksInfo)]
+    // [ResponseType(nameof(Rank2C_GetRanksInfo))]
+    // public partial class C2Rank_GetRanksInfo : MessageObject, IActorRankInfoRequest
+    // {
+    //     public static C2Rank_GetRanksInfo Create(bool isFromPool = false)
+    //     {
+    //         return ObjectPool.Instance.Fetch(typeof(C2Rank_GetRanksInfo), isFromPool) as C2Rank_GetRanksInfo;
+    //     }
+    //
+    //     [MemoryPackOrder(0)]
+    //     public int RpcId { get; set; }
+    //
+    //     public override void Dispose()
+    //     {
+    //         if (!this.IsFromPool)
+    //         {
+    //             return;
+    //         }
+    //
+    //         this.RpcId = default;
+    //
+    //         ObjectPool.Instance.Recycle(this);
+    //     }
+    // }
+    //
+    // // 排行榜服务器回复客户端排行榜信息
+    // [MemoryPackable]
+    // [Message(OuterMessage.Rank2C_GetRanksInfo)]
+    // public partial class Rank2C_GetRanksInfo : MessageObject, IActorRankInfoResponse
+    // {
+    //     public static Rank2C_GetRanksInfo Create(bool isFromPool = false)
+    //     {
+    //         return ObjectPool.Instance.Fetch(typeof(Rank2C_GetRanksInfo), isFromPool) as Rank2C_GetRanksInfo;
+    //     }
+    //
+    //     [MemoryPackOrder(89)]
+    //     public int RpcId { get; set; }
+    //
+    //     [MemoryPackOrder(90)]
+    //     public int Error { get; set; }
+    //
+    //     [MemoryPackOrder(91)]
+    //     public string Message { get; set; }
+    //
+    //     [MemoryPackOrder(0)]
+    //     public List<RankInfoProto> RankInfoProtoList { get; set; } = new();
+    //
+    //     public override void Dispose()
+    //     {
+    //         if (!this.IsFromPool)
+    //         {
+    //             return;
+    //         }
+    //
+    //         this.RpcId = default;
+    //         this.Error = default;
+    //         this.Message = default;
+    //         this.RankInfoProtoList.Clear();
+    //
+    //         ObjectPool.Instance.Recycle(this);
+    //     }
+    // }
+    //
+    // // 客户端发送聊天信息到聊天服务器
+    // [MemoryPackable]
+    // [Message(OuterMessage.C2Chat_SendChatInfo)]
+    // [ResponseType(nameof(Chat2C_SendChatInfo))]
+    // public partial class C2Chat_SendChatInfo : MessageObject, IActorChatInfoRequest
+    // {
+    //     public static C2Chat_SendChatInfo Create(bool isFromPool = false)
+    //     {
+    //         return ObjectPool.Instance.Fetch(typeof(C2Chat_SendChatInfo), isFromPool) as C2Chat_SendChatInfo;
+    //     }
+    //
+    //     [MemoryPackOrder(0)]
+    //     public int RpcId { get; set; }
+    //
+    //     [MemoryPackOrder(1)]
+    //     public string ChatMessage { get; set; }
+    //
+    //     public override void Dispose()
+    //     {
+    //         if (!this.IsFromPool)
+    //         {
+    //             return;
+    //         }
+    //
+    //         this.RpcId = default;
+    //         this.ChatMessage = default;
+    //
+    //         ObjectPool.Instance.Recycle(this);
+    //     }
+    // }
+    //
+    // [MemoryPackable]
+    // [Message(OuterMessage.Chat2C_SendChatInfo)]
+    // public partial class Chat2C_SendChatInfo : MessageObject, IActorChatInfoResponse
+    // {
+    //     public static Chat2C_SendChatInfo Create(bool isFromPool = false)
+    //     {
+    //         return ObjectPool.Instance.Fetch(typeof(Chat2C_SendChatInfo), isFromPool) as Chat2C_SendChatInfo;
+    //     }
+    //
+    //     [MemoryPackOrder(89)]
+    //     public int RpcId { get; set; }
+    //
+    //     [MemoryPackOrder(90)]
+    //     public int Error { get; set; }
+    //
+    //     [MemoryPackOrder(91)]
+    //     public string Message { get; set; }
+    //
+    //     public override void Dispose()
+    //     {
+    //         if (!this.IsFromPool)
+    //         {
+    //             return;
+    //         }
+    //
+    //         this.RpcId = default;
+    //         this.Error = default;
+    //         this.Message = default;
+    //
+    //         ObjectPool.Instance.Recycle(this);
+    //     }
+    // }
 
     // 服务器发送客户端更新聊天信息
     [MemoryPackable]
