@@ -11,5 +11,7 @@ namespace ET.Client
     	WindowID_LSLobby,
 		WindowID_LSLogin,
 		WindowID_LSRoom,
+		WindowID_Loading,
+		WindowID_Main,
 	}
 }

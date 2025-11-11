@@ -12,6 +12,9 @@ namespace ET.Client
             {
                 Scene currentScene = root.CurrentScene();
 
+                Log.Info($"开始加载场景: {currentScene.Name}");
+                root.GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Loading);
+                
                 ResourcesLoaderComponent resourcesLoaderComponent = currentScene.GetComponent<ResourcesLoaderComponent>();
             
                 // 加载场景资源

@@ -389,6 +389,7 @@ namespace ET.Client
         {
             if (!self.VisibleWindowsDic.ContainsKey((int)windowId))
             {
+                Log.Warning($"检测关闭 WindowsID: {windowId} 失败！");
                 return;
             }
 
