@@ -771,3 +771,20 @@ message Chat2C_NoticeChatInfo // IMessage
 	string Name = 1;
 	string ChatMessage = 2;
 }
+
+
+
+//请求开始副本
+//ResponseType M2C_StartDungeon
+message C2M_StartDungeon // ILocationRequest
+{
+	int32 RpcId        = 1;
+	int32 LevelId = 2;
+}
+
+message M2C_StartDungeon // ILocationResponse
+{
+	int32 RpcId    = 90;
+	int32 Error    = 91;
+	string Message = 92;
+}

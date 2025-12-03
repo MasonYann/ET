@@ -12,7 +12,7 @@ namespace ET.Client
             {
                 Scene currentScene = root.CurrentScene();
 
-                currentScene.GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Loading);
+                root.GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Loading);
                 
                 ResourcesLoaderComponent resourcesLoaderComponent = currentScene.GetComponent<ResourcesLoaderComponent>();
             

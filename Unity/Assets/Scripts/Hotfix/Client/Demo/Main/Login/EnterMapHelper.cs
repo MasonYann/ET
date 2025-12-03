@@ -14,6 +14,8 @@ namespace ET.Client
                 // 等待场景切换完成
                 await root.GetComponent<ObjectWait>().Wait<Wait_SceneChangeFinish>();
                 
+                Log.Debug("进入地图完成，地图ID：" + g2CEnterMap.MyId);
+                
                 EventSystem.Instance.Publish(root, new EnterMapFinish());
             }
             catch (Exception e)

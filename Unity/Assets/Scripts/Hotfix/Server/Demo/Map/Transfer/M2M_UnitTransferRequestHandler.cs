@@ -4,7 +4,7 @@ using Unity.Mathematics;
 namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
-    public class M2M_UnitTransferRequestHandler: MessageHandler<Scene, M2M_UnitTransferRequest, M2M_UnitTransferResponse>
+    public class M2M_UnitTransferRequestHandler : MessageHandler<Scene, M2M_UnitTransferRequest, M2M_UnitTransferResponse>
     {
         protected override async ETTask Run(Scene scene, M2M_UnitTransferRequest request, M2M_UnitTransferResponse response)
         {
@@ -37,29 +37,29 @@ namespace ET.Server
             M2C_CreateMyUnit m2CCreateUnits = M2C_CreateMyUnit.Create();
             m2CCreateUnits.Unit = UnitHelper.CreateUnitInfo(unit);
             MapMessageHelper.SendToClient(unit, m2CCreateUnits);
-            
+
             //通知客户端同步背包信息
             // ItemUpdateNoticeHelper.SyncAllBagItems(unit);
             // ItemUpdateNoticeHelper.SyncAllEquipItems(unit);
-			
+
             //通知客户端同步打造信息
             // ForgeHelper.SyncAllProduction(unit);
-			
+
             //通知客户端同步任务信息
             // TaskNoticeHelper.SyncAllTaskInfo(unit);
-			
 
             //挂载数值组件
             // unit.AddComponent<NumericNoticeComponent>();NumericComponent
             //挂载战斗检测组件
             // unit.AddComponent<AdventureCheckComponent>();
 
-
             // 加入aoi
             // unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
 
             // 解锁location，可以接收发给Unit的消息
             await scene.Root().GetComponent<LocationProxyComponent>().UnLock(LocationType.Unit, unit.Id, request.OldActorId, unit.GetActorId());
+
+         
         }
     }
 }

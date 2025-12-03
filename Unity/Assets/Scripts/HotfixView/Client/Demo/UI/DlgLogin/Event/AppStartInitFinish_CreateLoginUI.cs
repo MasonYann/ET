@@ -5,7 +5,6 @@
     {
         protected override async ETTask Run(Scene root, AppStartInitFinish args)
         {
-            Log.Info(root.GetComponent<UIComponent>().ToString());
             await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Login);
         }
     }

@@ -52,5 +52,17 @@ namespace ET
         public const int ERR_RoleNameSame = 200017;
 
         public const int ERR_RoleNotExist = 200018;//角色不存在
+    
+        public const int ERR_AlreadyAdventureState = 200027; //已经在关卡战斗状态
+        public const int ERR_AdventureInDying = 200028; //死亡状态
+        public const int ERR_AdventureErrorLevel = 200029; //关卡是否在配置中
+        public const int ERR_AdventureLevelNotEnough = 200030; //是否满足进入关卡的最低等级
+        
+        public const int ERR_NoStartAdventure = 200031; //未开始关卡
+
+        public const int ERR_AdventureRoundError= 200032; //战斗回合数错误
+        
+        public const int ERR_AdventureLevelIdError = 200033; //关卡Id错误
+
     }
 }
