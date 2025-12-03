@@ -1,0 +1,14 @@
+{"dict": [
+[1001, {"_t":"DungeonLevelConfig","_id":1001,"Name":"海伯利安","TotalDays":30,"EnergyCost":5,"AttributeRatio":10,"EventPoolId":10,"ThemeId":101,"BgRes":"Bg_Ocean1"}],
+[1002, {"_t":"DungeonLevelConfig","_id":1002,"Name":"迷雾沙漠","TotalDays":40,"EnergyCost":5,"AttributeRatio":15,"EventPoolId":10,"ThemeId":102,"BgRes":"Bg_Ocean2"}],
+[1003, {"_t":"DungeonLevelConfig","_id":1003,"Name":"燃烧地狱","TotalDays":50,"EnergyCost":5,"AttributeRatio":20,"EventPoolId":10,"ThemeId":103,"BgRes":"Bg_Ocean3"}],
+[1004, {"_t":"DungeonLevelConfig","_id":1004,"Name":"寂静之海","TotalDays":60,"EnergyCost":10,"AttributeRatio":25,"EventPoolId":20,"ThemeId":104,"BgRes":"Bg_Ocean4"}],
+[1005, {"_t":"DungeonLevelConfig","_id":1005,"Name":"关卡5","TotalDays":60,"EnergyCost":10,"AttributeRatio":30,"EventPoolId":20,"ThemeId":101,"BgRes":"Bg_Ocean5"}],
+[1006, {"_t":"DungeonLevelConfig","_id":1006,"Name":"关卡6","TotalDays":60,"EnergyCost":10,"AttributeRatio":35,"EventPoolId":20,"ThemeId":102,"BgRes":"Bg_Ocean6"}],
+[1007, {"_t":"DungeonLevelConfig","_id":1007,"Name":"关卡7","TotalDays":60,"EnergyCost":15,"AttributeRatio":40,"EventPoolId":30,"ThemeId":103,"BgRes":"Bg_Ocean7"}],
+[1008, {"_t":"DungeonLevelConfig","_id":1008,"Name":"关卡8","TotalDays":60,"EnergyCost":15,"AttributeRatio":45,"EventPoolId":30,"ThemeId":104,"BgRes":"Bg_Ocean8"}],
+[1009, {"_t":"DungeonLevelConfig","_id":1009,"Name":"关卡9","TotalDays":60,"EnergyCost":15,"AttributeRatio":50,"EventPoolId":30,"ThemeId":101,"BgRes":"Bg_Ocean9"}],
+[1010, {"_t":"DungeonLevelConfig","_id":1010,"Name":"关卡10","TotalDays":60,"EnergyCost":20,"AttributeRatio":55,"EventPoolId":40,"ThemeId":102,"BgRes":"Bg_Ocean10"}],
+[1011, {"_t":"DungeonLevelConfig","_id":1011,"Name":"关卡11","TotalDays":60,"EnergyCost":20,"AttributeRatio":60,"EventPoolId":40,"ThemeId":103,"BgRes":"Bg_Ocean11"}],
+[1012, {"_t":"DungeonLevelConfig","_id":1012,"Name":"关卡12","TotalDays":60,"EnergyCost":20,"AttributeRatio":65,"EventPoolId":40,"ThemeId":104,"BgRes":"Bg_Ocean12"}],
+]}

@@ -1,0 +1,11 @@
+{"dict": [
+[1001, {"_t":"DungeonThemeContentConfig","_id":1001,"ThemePackageId":101,"Tag":"\"EASY\"","TotalId":2001,"Desc":"森林:简单怪是史莱姆组"}],
+[1002, {"_t":"DungeonThemeContentConfig","_id":1002,"ThemePackageId":101,"Tag":"\"NORMAL\"","TotalId":2002,"Desc":"森林:普通怪是野猪组"}],
+[1003, {"_t":"DungeonThemeContentConfig","_id":1003,"ThemePackageId":101,"Tag":"\"ELITE\"","TotalId":2003,"Desc":"森林:精英怪是树妖"}],
+[1004, {"_t":"DungeonThemeContentConfig","_id":1004,"ThemePackageId":101,"Tag":"\"BOSS\"","TotalId":2004,"Desc":"森林:Boss是德鲁伊"}],
+[1005, {"_t":"DungeonThemeContentConfig","_id":1005,"ThemePackageId":101,"Tag":"\"SHOP_NORMAL\"","TotalId":5001,"Desc":"森林:普通的森林商店ID"}],
+[1006, {"_t":"DungeonThemeContentConfig","_id":1006,"ThemePackageId":102,"Tag":"\"EASY\"","TotalId":3001,"Desc":"沙漠:简单怪是蝎子组"}],
+[1007, {"_t":"DungeonThemeContentConfig","_id":1007,"ThemePackageId":102,"Tag":"\"NORMAL\"","TotalId":3002,"Desc":"沙漠:普通怪是响尾蛇组"}],
+[1008, {"_t":"DungeonThemeContentConfig","_id":1008,"ThemePackageId":102,"Tag":"\"ELITE\"","TotalId":3003,"Desc":"沙漠:精英怪是木乃伊"}],
+[1009, {"_t":"DungeonThemeContentConfig","_id":1009,"ThemePackageId":102,"Tag":"\"BOSS\"","TotalId":3004,"Desc":"沙漠:Boss是沙虫王"}],
+]}

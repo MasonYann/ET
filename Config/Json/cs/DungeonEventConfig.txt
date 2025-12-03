@@ -1,0 +1,12 @@
+{"dict": [
+[1, {"_t":"DungeonEventConfig","_id":1,"EventPoolId":10,"DayIndex":1,"EventType":2,"EventParam":"\"START_BUFF\"","Weight":0,"Desc":"标准:第1天固定选开局Buff"}],
+[2, {"_t":"DungeonEventConfig","_id":2,"EventPoolId":10,"DayIndex":15,"EventType":1,"EventParam":"\"ELITE\"","Weight":0,"Desc":"标准:第15天固定打精英"}],
+[3, {"_t":"DungeonEventConfig","_id":3,"EventPoolId":10,"DayIndex":30,"EventType":1,"EventParam":"\"BOSS\"","Weight":0,"Desc":"标准:第30天固定打Boss"}],
+[4, {"_t":"DungeonEventConfig","_id":4,"EventPoolId":10,"DayIndex":0,"EventType":1,"EventParam":"\"EASY\"","Weight":60,"Desc":"标准:随机天-简单怪(60%)"}],
+[5, {"_t":"DungeonEventConfig","_id":5,"EventPoolId":10,"DayIndex":0,"EventType":1,"EventParam":"\"NORMAL\"","Weight":30,"Desc":"标准:随机天-普通怪(30%)"}],
+[6, {"_t":"DungeonEventConfig","_id":6,"EventPoolId":10,"DayIndex":0,"EventType":3,"EventParam":"\"SHOP_NORMAL\"","Weight":10,"Desc":"标准:随机天-遇到商店(10%)"}],
+[7, {"_t":"DungeonEventConfig","_id":7,"EventPoolId":20,"DayIndex":1,"EventType":2,"EventParam":"\"START_BUFF\"","Weight":0,"Desc":"高压:第1天固定选Buff"}],
+[8, {"_t":"DungeonEventConfig","_id":8,"EventPoolId":20,"DayIndex":10,"EventType":1,"EventParam":"\"ELITE\"","Weight":0,"Desc":"高压:第10天就打精英(更早)"}],
+[9, {"_t":"DungeonEventConfig","_id":9,"EventPoolId":20,"DayIndex":20,"EventType":1,"EventParam":"\"ELITE\"","Weight":0,"Desc":"高压:第20天又打精英"}],
+[10, {"_t":"DungeonEventConfig","_id":10,"EventPoolId":20,"DayIndex":0,"EventType":1,"EventParam":"\"HARD\"","Weight":80,"Desc":"高压:随机全是困难怪"}],
+]}
