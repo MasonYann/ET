@@ -23,6 +23,8 @@ namespace ET
 
         public bool EnableDll;
 
+        public bool IsAIDevMode;
+
         public BuildType BuildType;
 
         public AppType AppType;
