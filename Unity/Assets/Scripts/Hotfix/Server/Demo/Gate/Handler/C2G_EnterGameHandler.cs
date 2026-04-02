@@ -53,8 +53,7 @@ namespace ET.Server
                             IResponse reqEnter = await session.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(player.UnitId, g2MSecondLogin);
                             if (reqEnter.Error == ErrorCode.ERR_Success)
                             {
-                                Log.Console("作业:二次登陆逻辑，补全下发切换场景消息");
-
+                                response.MyUnitId = player.UnitId;
                                 return;
                             }
 

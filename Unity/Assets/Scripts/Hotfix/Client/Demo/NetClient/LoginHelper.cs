@@ -4,7 +4,11 @@ namespace ET.Client
     {
         public static async ETTask Login(Scene root, string account, string password)
         {
-            root.RemoveComponent<ClientSenderComponent>();
+            ClientSenderComponent oldClientSenderComponent = root.GetComponent<ClientSenderComponent>();
+            if (oldClientSenderComponent != null)
+            {
+                await oldClientSenderComponent.DisposeAsync();
+            }
 
             ClientSenderComponent clientSenderComponent = root.AddComponent<ClientSenderComponent>();
 
