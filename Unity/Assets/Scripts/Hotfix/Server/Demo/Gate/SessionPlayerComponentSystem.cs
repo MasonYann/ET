@@ -12,13 +12,29 @@
                 return;
             }
 
-            
-            // 发送断线消息 因为使用统一下线流程，故注释
-            //root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(self.Player.Id, G2M_SessionDisconnect.Create());
+            Player player = self.Player;
+            if (player == null || player.IsDisposed)
+            {
+                return;
+            }
 
-            //TODD 作业:根据是否是二次登陆决定是否执行Player的下线流程
-            
-            
+            Session session = self.GetParent<Session>();
+            PlayerSessionComponent playerSessionComponent = player.GetComponent<PlayerSessionComponent>();
+            if (playerSessionComponent != null && playerSessionComponent.Session == session)
+            {
+                playerSessionComponent.Session = null;
+
+                if (player.GetComponent<PlayerOfflineOutTimeComponent>() == null)
+                {
+                    player.AddComponent<PlayerOfflineOutTimeComponent>();
+                }
+
+                if (player.PlayerState == PlayerState.Game)
+                {
+                    root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(player.UnitId, G2M_SessionDisconnect.Create());
+                }
+            }
+
             self.Player = null;
         }
         

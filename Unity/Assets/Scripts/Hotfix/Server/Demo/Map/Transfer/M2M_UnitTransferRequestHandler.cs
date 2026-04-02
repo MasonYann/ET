@@ -21,16 +21,31 @@ namespace ET.Server
                 unit.AddComponent(entity);
             }
 
-            unit.AddComponent<MoveComponent>();
-            unit.AddComponent<PathfindingComponent, string>(scene.Name);
+            if (unit.GetComponent<MoveComponent>() == null)
+            {
+                unit.AddComponent<MoveComponent>();
+            }
+
+            if (unit.GetComponent<PathfindingComponent>() == null)
+            {
+                unit.AddComponent<PathfindingComponent, string>(scene.Name);
+            }
+
             // unit.Position = new float3(-10, 0, -10);
             unit.Position = new float3(0, 0, 0);
-            
-            NumericComponent numericComponent = unit.AddComponent<NumericComponent>();
-            numericComponent.Set(NumericType.Speed, 6f); // 速度是6米每秒
-            numericComponent.Set(NumericType.AOI, 15000); // 视野15米
 
-            unit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
+            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
+            if (numericComponent == null)
+            {
+                numericComponent = unit.AddComponent<NumericComponent>();
+                numericComponent.Set(NumericType.Speed, 6f); // 速度是6米每秒
+                numericComponent.Set(NumericType.AOI, 15000); // 视野15米
+            }
+
+            if (unit.GetComponent<MailBoxComponent>() == null)
+            {
+                unit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
+            }
 
             // 通知客户端开始切场景
             M2C_StartSceneChange m2CStartSceneChange = M2C_StartSceneChange.Create();
@@ -44,7 +59,10 @@ namespace ET.Server
             MapMessageHelper.SendToClient(unit, m2CCreateUnits);
 
             // 加入aoi
-            unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
+            if (unit.GetComponent<AOIEntity>() == null)
+            {
+                unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
+            }
 
             // 解锁location，可以接收发给Unit的消息
             await scene.Root().GetComponent<LocationProxyComponent>().UnLock(LocationType.Unit, unit.Id, request.OldActorId, unit.GetActorId());

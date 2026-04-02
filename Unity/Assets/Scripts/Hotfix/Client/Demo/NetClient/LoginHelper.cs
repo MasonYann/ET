@@ -4,7 +4,17 @@ namespace ET.Client
     {
         public static async ETTask Login(Scene root, string account, string password)
         {
-            root.RemoveComponent<ClientSenderComponent>();
+            ClientSenderComponent oldClientSenderComponent = root.GetComponent<ClientSenderComponent>();
+            if (oldClientSenderComponent != null)
+            {
+                await oldClientSenderComponent.DisposeAsync();
+            }
+
+            AIDevModeRuntimeComponent aiDevModeRuntimeComponent = root.GetComponent<AIDevModeRuntimeComponent>();
+            if (aiDevModeRuntimeComponent != null)
+            {
+                aiDevModeRuntimeComponent.HasRedirectedToTestScene = false;
+            }
 
             ClientSenderComponent clientSenderComponent = root.AddComponent<ClientSenderComponent>();
 
